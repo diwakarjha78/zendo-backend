@@ -42,7 +42,7 @@ export const create_user = async (req, res) => {
     });
 
     res.status(200).json({
-      status_code: 201,
+      status_code: 200,
       message: 'User has been created successfully',
       data: updated_user,
     });
