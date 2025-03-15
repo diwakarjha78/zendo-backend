@@ -23,7 +23,7 @@ Help_support.init(
   {
     sequelize,
     modelName: 'Help_support',
-    tableName: 'help_support',
+    tableName: 'help_supports',
     timestamps: true,
   }
 );

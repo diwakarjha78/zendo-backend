@@ -1,6 +1,6 @@
 import mysql from 'mysql2/promise';
 import { Sequelize } from 'sequelize';
-import { DB_HOST, DB_NAME, DB_PASS, DB_PORT, DB_USER } from './dotenv.config.js';
+import { DB_HOST, DB_NAME, DB_PASS, DB_PORT, DB_USER, NODE_ENV } from './dotenv.config.js';
 
 const sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASS, {
   host: DB_HOST,
@@ -22,7 +22,9 @@ const ensure_db_exists = async () => {
 
 const connect_db = async () => {
   try {
-    await ensure_db_exists();
+    if (NODE_ENV === 'development') {
+      await ensure_db_exists();
+    }
     await sequelize.authenticate();
     console.log('Connected to MySQL DB...');
   } catch (error) {

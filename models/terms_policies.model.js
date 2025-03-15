@@ -23,7 +23,7 @@ Terms_policies.init(
   {
     sequelize,
     modelName: 'Terms_policies',
-    tableName: 'terms_policies',
+    tableName: 'terms_policiess',
     timestamps: true,
   }
 );

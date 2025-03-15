@@ -31,7 +31,7 @@ Verification_otp.init(
   {
     sequelize,
     modelName: 'Verification_otp',
-    tableName: 'verification_otp',
+    tableName: 'verification_otps',
     timestamps: true,
   }
 );

@@ -29,7 +29,7 @@ Device_count.init(
   {
     sequelize,
     modelName: 'Device_count',
-    tableName: 'device_count',
+    tableName: 'device_counts',
     timestamps: true,
   }
 );

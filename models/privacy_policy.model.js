@@ -23,7 +23,7 @@ Privacy_policy.init(
   {
     sequelize,
     modelName: 'Privacy_policy',
-    tableName: 'privacy_policy',
+    tableName: 'privacy_policys',
     timestamps: true,
   }
 );

@@ -46,7 +46,7 @@ Contact_us.init(
   {
     sequelize,
     modelName: 'Contact_us',
-    tableName: 'contact_us',
+    tableName: 'contact_uss',
     timestamps: true,
   }
 );

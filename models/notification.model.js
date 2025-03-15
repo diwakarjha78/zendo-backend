@@ -43,7 +43,7 @@ Notification.init(
   {
     sequelize,
     modelName: 'Notification',
-    tableName: 'notification',
+    tableName: 'notifications',
     timestamps: true,
   }
 );

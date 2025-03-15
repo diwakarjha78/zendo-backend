@@ -45,7 +45,7 @@ Budget_estimation.init(
   {
     sequelize,
     modelName: 'Budget_estimation',
-    tableName: 'budget_estimation',
+    tableName: 'budget_estimations',
     timestamps: true,
   }
 );

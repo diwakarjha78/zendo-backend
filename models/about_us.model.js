@@ -19,7 +19,7 @@ About_us.init(
   {
     sequelize,
     modelName: 'About_us',
-    tableName: 'about_us',
+    tableName: 'about_uss',
     timestamps: true,
   }
 );

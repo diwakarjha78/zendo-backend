@@ -64,7 +64,7 @@ User.init(
   {
     sequelize,
     modelName: 'User',
-    tableName: 'user',
+    tableName: 'users',
     timestamps: true,
   }
 );

@@ -4,6 +4,9 @@ dotenv.config();
 // Port
 export const PORT = process.env.PORT || 5000;
 
+// Node Environment
+export const NODE_ENV = process.env.NODE_ENV;
+
 // Base URL
 export const BASE_URL = process.env.BASE_URL;
 
