@@ -11,21 +11,18 @@ export const main_budget_estimation = async (req, res) => {
         message: 'Title is required',
       });
     }
-
     if (!pricelist || !Array.isArray(pricelist) || pricelist.length === 0) {
       return res.status(200).json({
         status_code: 400,
         message: 'Pricelist must be a non-empty array',
       });
     }
-
     if (!pricelist.every((item) => typeof item === 'string')) {
       return res.status(200).json({
         status_code: 400,
         message: 'Pricelist must contain only strings',
       });
     }
-
     if (!image_url?.trim()) {
       return res.status(400).json({
         status_code: 400,

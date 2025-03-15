@@ -1,10 +1,12 @@
 import User from '../models/user.model.js';
+import { BASE_URL } from '../configs/dotenv.config.js';
 
 export const update_user = async (req, res) => {
   const user = req.user;
 
   try {
-    const { username, mobile, image_url } = req.body;
+    const { username, mobile } = req.body;
+    const file = req.file;
 
     // Check if user exists
     const user_data = await User.findOne({
@@ -28,10 +30,9 @@ export const update_user = async (req, res) => {
     if (mobile !== undefined) {
       update_fields.mobile = mobile === '' ? '' : mobile.trim();
     }
-    if (image_url !== undefined) {
-      update_fields.image_url = image_url === '' ? '' : image_url.trim();
+    if (file) {
+      update_fields.image_url = `${BASE_URL}/api/images/${file.filename}`;
     }
-
     if (Object.keys(update_fields).length === 0) {
       return res.status(200).json({
         status_code: 400,

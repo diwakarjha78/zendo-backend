@@ -1,4 +1,5 @@
 import express from 'express';
+import { Image_upload } from '../middlewares/upload.middleware.js';
 import { get_about_us } from '../controllers/about_us.controller.js';
 import { main_budget_estimation, get_budget_estimation } from '../controllers/budget_estimation.controller.js';
 import { get_contact_details, contact_us_details } from '../controllers/contact.controller.js';
@@ -42,6 +43,6 @@ router.post('/signupOtpGenerate', generate_otp);
 router.post('/signupOtpVerify', verify_email);
 router.get('/termsPolicies', get_terms_policies);
 router.get('/userGetProfileData', verify_token, get_profile);
-router.post('/userUpdateProfile', verify_token, update_user);
+router.post('/userUpdateProfile', verify_token, Image_upload, update_user);
 
 export default router;

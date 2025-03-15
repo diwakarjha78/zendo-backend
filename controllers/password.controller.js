@@ -63,7 +63,9 @@ export const generate_forgot_password_otp = async (req, res) => {
       return res.status(200).json({
         status_code: 422,
         message: 'Email is not found',
-        error: `${email}`,
+        error: {
+          email: email,
+        },
       });
     }
 
@@ -133,7 +135,9 @@ export const verify_forgot_password_otp = async (req, res) => {
       return res.status(200).json({
         status_code: 422,
         message: 'Invalid OTP',
-        error: `${email}`,
+        error: {
+          email: email,
+        },
       });
     }
 
@@ -146,7 +150,9 @@ export const verify_forgot_password_otp = async (req, res) => {
       return res.status(200).json({
         status_code: 422,
         message: 'OTP has expired',
-        error: `${email}`,
+        error: {
+          email: email,
+        },
       });
     }
 

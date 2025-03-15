@@ -6,6 +6,7 @@ import router from './routes/index.routes.js';
 import rateLimit from 'express-rate-limit';
 import { PORT } from './configs/dotenv.config.js';
 import { connect_db } from './configs/db.config.js';
+import { Image_upload_dir } from './helpers/path_dir.helper.js';
 
 const app = express();
 
@@ -24,7 +25,12 @@ const limiter = rateLimit({
   },
 });
 app.use(limiter);
+
+// API Routes
 app.use('/api', router);
+
+// Static Images
+app.use('/api/images', express.static(Image_upload_dir));
 
 // Root
 app.get('/', (req, res) => {

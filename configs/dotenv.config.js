@@ -1,7 +1,11 @@
 import dotenv from 'dotenv';
 dotenv.config();
 
+// Port
 export const PORT = process.env.PORT || 5000;
+
+// Base URL
+export const BASE_URL = process.env.BASE_URL;
 
 // Database
 export const DB_HOST = process.env.DB_HOST;

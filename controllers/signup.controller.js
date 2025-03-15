@@ -75,7 +75,9 @@ export const generate_otp = async (req, res) => {
       return res.status(200).json({
         status_code: 422,
         message: 'Email already exist please try to login',
-        error: `${email}`,
+        error: {
+          email: email,
+        },
       });
     }
 
@@ -142,7 +144,7 @@ export const verify_email = async (req, res) => {
       return res.status(200).json({
         status_code: 422,
         message: 'Invalid OTP',
-        data: {
+        error: {
           email: email,
         },
       });
@@ -157,7 +159,7 @@ export const verify_email = async (req, res) => {
       return res.status(200).json({
         status_code: 422,
         message: 'OTP has expired',
-        data: {
+        error: {
           email: email,
         },
       });

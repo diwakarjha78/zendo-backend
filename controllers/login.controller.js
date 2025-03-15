@@ -22,7 +22,9 @@ export const login = async (req, res) => {
       return res.status(200).json({
         status_code: 422,
         message: 'Email is not registered',
-        error: `${email}`,
+        error: {
+          email: email,
+        },
       });
     }
     const is_match = await compare_password(password, user.password);
@@ -31,7 +33,9 @@ export const login = async (req, res) => {
       return res.status(200).json({
         status_code: 422,
         message: 'Incorrect Password',
-        error: `${email}`,
+        error: {
+          email: email,
+        },
       });
     }
 
