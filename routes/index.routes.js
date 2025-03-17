@@ -6,7 +6,7 @@ import { get_contact_details, contact_us_details } from '../controllers/contact.
 import { verify_token } from '../middlewares/token.middleware.js';
 import { set_device_count, get_device_count } from '../controllers/device_count.controller.js';
 import { get_help_support_data } from '../controllers/help_support.controller.js';
-import { login, refresh_token } from '../controllers/login.controller.js';
+import { login, logout, refresh_token } from '../controllers/login.controller.js';
 import { get_notifications, delete_notifications } from '../controllers/notification.controller.js';
 import {
   generate_forgot_password_otp,
@@ -32,6 +32,7 @@ router.post('/setDeviceCount', set_device_count);
 router.get('/getCount/:id', get_device_count);
 router.get('/getHelpSupport', get_help_support_data);
 router.post('/login', login);
+router.post('/logout', verify_token, logout);
 router.post('/refreshToken', refresh_token);
 router.get('/notification', verify_token, get_notifications);
 router.post('/deleteNotification', verify_token, delete_notifications);

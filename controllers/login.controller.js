@@ -124,3 +124,31 @@ export const refresh_token = async (req, res) => {
     });
   }
 };
+
+export const logout = async (req, res) => {
+  try {
+    // Assuming req.user is populated by your auth middleware
+    const user = req.user;
+    if (!user) {
+      return res.status(200).json({
+        status_code: 404,
+        message: 'User not found',
+      });
+    }
+
+    // Clear token and refresh_token
+    await User.update({ token: "", refresh_token: "" }, { where: { id: user.id } });
+
+    return res.status(200).json({
+      status_code: 200,
+      message: 'Logout successful',
+    });
+  } catch (error) {
+    console.error('Error during logout:', error);
+    return res.status(200).json({
+      status_code: 500,
+      message: 'Error during logout',
+      error: error.message,
+    });
+  }
+};
