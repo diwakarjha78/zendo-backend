@@ -2,11 +2,16 @@ import Notification from '../models/notification.model.js';
 
 export const get_notifications = async (req, res) => {
   try {
-    const user_id = req.user.id;
+    // const user_id = req.user.id;
 
     // Fetch notifications only for the logged-in user, sorted by date (latest first)
+    // const notifications = await Notification.findAll({
+    //   where: { user_id },
+    //   order: [['notification_date', 'DESC']],
+    // });
+
     const notifications = await Notification.findAll({
-      where: { user_id },
+      where: { userId: req.user.id }, // Adjust field name as per your model
       order: [['notification_date', 'DESC']],
     });
 

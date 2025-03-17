@@ -12,7 +12,7 @@ export const get_terms_policies = async (req, res) => {
     }
 
     return res.status(200).json({
-      stautus_code: 200,
+      status_code: 200,
       message: 'Data fetched successfully',
       data: terms_policies_data,
     });
