@@ -55,7 +55,7 @@ export async function up(queryInterface, Sequelize) {
       defaultValue: '',
     },
     subscription: {
-      type: DataTypes.BOOLEAN,
+      type: Sequelize.BOOLEAN,
       allowNull: false,
       defaultValue: false,
     },
