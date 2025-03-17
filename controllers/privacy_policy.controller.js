@@ -5,7 +5,7 @@ export const get_privacy_policy = async (req, res) => {
     const privacy_policy_data = await Privacy_policy.findAll({});
     if (privacy_policy_data.length === 0) {
       return res.status(200).json({
-        status_code: 402,
+        status_code: 404,
         error: 'No data found for the privacy policy',
       });
     }

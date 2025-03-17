@@ -6,7 +6,7 @@ export const get_help_support_data = async (req, res) => {
 
     if (help_support.length === 0) {
       return res.status(200).json({
-        status_code: 422,
+        status_code: 404,
         message: 'No help support data found',
       });
     }

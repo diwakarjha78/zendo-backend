@@ -16,7 +16,7 @@ export const compare_password = async (password, hashed_password) => {
 
 export const generate_token = (user) => {
   const token = jwt.sign({ id: user.id, email: user.email, username: user.username }, JWT_SECRET_KEY, {
-    expiresIn: '1d',
+    expiresIn: '1m',
   });
   return token;
 };
