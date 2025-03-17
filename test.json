@@ -1,0 +1,28 @@
+{
+    "status_code": 200,
+    "message": "",
+    "data": {
+        "is_paid": "true",
+        "sections": [
+            {
+                "heading": "Lastest Rendering",
+                "latest_rendering_list": [
+                    {
+                        "id": 1,
+                        "is_paid": "true",
+                        "modern": "",
+                        "product_alpha": "0",
+                        "render_image": ""
+                    },
+                    {
+                        "id": 2,
+                        "is_paid": "false",
+                        "modern": "",
+                        "product_alpha": "0",
+                        "render_image": ""
+                    }
+                ]
+            }
+        ]
+    }
+}

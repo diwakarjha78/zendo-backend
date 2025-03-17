@@ -1,3 +1,4 @@
+import jwt from "jsonwebtoken";
 import User from '../models/user.model.js';
 import { JWT_REFRESH_TOKEN_SECRET_KEY } from '../configs/dotenv.config.js';
 import { compare_password, generate_token, generate_refresh_token } from '../helpers/auth.helper.js';
