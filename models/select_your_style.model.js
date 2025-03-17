@@ -19,17 +19,17 @@ Select_your_style.init(
     model: {
       type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: "",
+      defaultValue: '',
     },
     product_alpha: {
       type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: "",
+      defaultValue: '',
     },
     product_image: {
       type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: "",
+      defaultValue: '',
     },
   },
   {

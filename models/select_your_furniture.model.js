@@ -19,17 +19,17 @@ Select_your_furniture.init(
     package_name: {
       type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: "",
+      defaultValue: '',
     },
     product_alpha: {
       type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: "",
+      defaultValue: '',
     },
     package_url: {
       type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: "",
+      defaultValue: '',
     },
   },
   {

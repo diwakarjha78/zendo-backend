@@ -16,17 +16,17 @@ export async function up(queryInterface, Sequelize) {
     selectroom: {
       type: Sequelize.STRING,
       allowNull: false,
-      defaultValue: "",
+      defaultValue: '',
     },
     product_alpha: {
       type: Sequelize.STRING,
       allowNull: false,
-      defaultValue: "",
+      defaultValue: '',
     },
     room_image: {
       type: Sequelize.STRING,
       allowNull: false,
-      defaultValue: "",
+      defaultValue: '',
     },
     createdAt: {
       type: Sequelize.DATE,

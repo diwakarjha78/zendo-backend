@@ -15,17 +15,17 @@ export async function up(queryInterface, Sequelize) {
     modern: {
       type: Sequelize.STRING,
       allowNull: false,
-      defaultValue: "",
+      defaultValue: '',
     },
     product_alpha: {
       type: Sequelize.STRING,
       allowNull: false,
-      defaultValue: "",
+      defaultValue: '',
     },
     render_image: {
       type: Sequelize.STRING,
       allowNull: false,
-      defaultValue: "",
+      defaultValue: '',
     },
     createdAt: {
       type: Sequelize.DATE,

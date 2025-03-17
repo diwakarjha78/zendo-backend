@@ -32,7 +32,7 @@ export const verify_token = async (req, res, next) => {
     // 4. Check if user exists
     if (!user) {
       return res.status(200).json({
-        status_code: 401,
+        status_code: 404,
         message: 'User not found. Invalid token',
       });
     }

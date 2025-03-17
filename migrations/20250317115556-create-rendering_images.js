@@ -1,30 +1,20 @@
 'use strict';
 
 export async function up(queryInterface, Sequelize) {
-  await queryInterface.createTable('select_your_furnitures', {
+  await queryInterface.createTable('rendering_images', {
     id: {
       type: Sequelize.INTEGER,
       primaryKey: true,
       autoIncrement: true,
       allowNull: false,
     },
-    is_paid: {
-      type: Sequelize.BOOLEAN,
-      allowNull: false,
-      defaultValue: false,
-    },
-    package_name: {
-      type: Sequelize.STRING,
+    ai_image: {
+      type: Sequelize.TEXT,
       allowNull: false,
       defaultValue: '',
     },
-    product_alpha: {
-      type: Sequelize.STRING,
-      allowNull: false,
-      defaultValue: '',
-    },
-    package_url: {
-      type: Sequelize.STRING,
+    furniture_data: {
+      type: Sequelize.TEXT,
       allowNull: false,
       defaultValue: '',
     },
@@ -40,5 +30,5 @@ export async function up(queryInterface, Sequelize) {
 }
 
 export async function down(queryInterface, Sequelize) {
-  await queryInterface.dropTable('select_your_furnitures');
+  await queryInterface.dropTable('rendering_images');
 }
