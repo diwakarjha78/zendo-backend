@@ -1,7 +1,10 @@
-'use strict';
+import { Model, DataTypes } from 'sequelize';
+import { sequelize } from '../configs/db.config.js';
 
-export async function up(queryInterface, Sequelize) {
-  await queryInterface.createTable('select_your_furnitures', {
+class Select_your_budget extends Model {}
+
+Select_your_budget.init(
+  {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
@@ -13,7 +16,12 @@ export async function up(queryInterface, Sequelize) {
       allowNull: false,
       defaultValue: false,
     },
-    package_name: {
+    budget_low: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      defaultValue: "",
+    },
+    budget_image: {
       type: DataTypes.STRING,
       allowNull: false,
       defaultValue: "",
@@ -23,22 +31,13 @@ export async function up(queryInterface, Sequelize) {
       allowNull: false,
       defaultValue: "",
     },
-    package_url: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      defaultValue: "",
-    },
-    createdAt: {
-      type: Sequelize.DATE,
-      allowNull: false,
-    },
-    updatedAt: {
-      type: Sequelize.DATE,
-      allowNull: false,
-    },
-  });
-}
+  },
+  {
+    sequelize,
+    modelName: 'Select_your_budget',
+    tableName: 'select_your_budgets',
+    timestamps: true,
+  }
+);
 
-export async function down(queryInterface, Sequelize) {
-  await queryInterface.dropTable('select_your_furnitures');
-}
+export default Select_your_budget;
