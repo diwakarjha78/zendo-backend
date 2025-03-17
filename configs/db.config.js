@@ -7,6 +7,7 @@ const sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASS, {
   port: DB_PORT,
   dialect: 'mysql',
   timezone: '+05:30',
+  logging: NODE_ENV === 'development' ? console.log : false,
 });
 
 const ensure_db_exists = async () => {

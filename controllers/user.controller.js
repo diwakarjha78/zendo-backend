@@ -80,7 +80,7 @@ export const get_profile = async (req, res) => {
         email: user.email,
       },
       attributes: {
-        exclude: ['passowrd'],
+        exclude: ['password'],
       },
     });
 
