@@ -3,28 +3,28 @@
 export async function up(queryInterface, Sequelize) {
   await queryInterface.createTable('select_your_furnitures', {
     id: {
-      type: DataTypes.INTEGER,
+      type: Sequelize.INTEGER,
       primaryKey: true,
       autoIncrement: true,
       allowNull: false,
     },
     is_paid: {
-      type: DataTypes.BOOLEAN,
+      type: Sequelize.BOOLEAN,
       allowNull: false,
       defaultValue: false,
     },
     package_name: {
-      type: DataTypes.STRING,
+      type: Sequelize.STRING,
       allowNull: false,
       defaultValue: "",
     },
     product_alpha: {
-      type: DataTypes.STRING,
+      type: Sequelize.STRING,
       allowNull: false,
       defaultValue: "",
     },
     package_url: {
-      type: DataTypes.STRING,
+      type: Sequelize.STRING,
       allowNull: false,
       defaultValue: "",
     },

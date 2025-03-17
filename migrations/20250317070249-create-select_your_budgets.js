@@ -3,28 +3,28 @@
 export async function up(queryInterface, Sequelize) {
   await queryInterface.createTable('select_your_budgets', {
     id: {
-      type: DataTypes.INTEGER,
+      type: Sequelize.INTEGER,
       primaryKey: true,
       autoIncrement: true,
       allowNull: false,
     },
     is_paid: {
-      type: DataTypes.BOOLEAN,
+      type: Sequelize.BOOLEAN,
       allowNull: false,
       defaultValue: false,
     },
     budget_low: {
-      type: DataTypes.STRING,
+      type: Sequelize.STRING,
       allowNull: false,
       defaultValue: '',
     },
     budget_image: {
-      type: DataTypes.STRING,
+      type: Sequelize.STRING,
       allowNull: false,
       defaultValue: '',
     },
     product_alpha: {
-      type: DataTypes.STRING,
+      type: Sequelize.STRING,
       allowNull: false,
       defaultValue: '',
     },
