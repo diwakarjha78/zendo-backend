@@ -60,6 +60,11 @@ User.init(
       allowNull: false,
       defaultValue: '',
     },
+    subscription: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false,
+    },
   },
   {
     sequelize,

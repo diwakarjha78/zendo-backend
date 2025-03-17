@@ -18,6 +18,7 @@ import { get_privacy_policy } from '../controllers/privacy_policy.controller.js'
 import { create_user, generate_otp, verify_email } from '../controllers/signup.controller.js';
 import { get_terms_policies } from '../controllers/terms_policies.controller.js';
 import { get_profile, update_user } from '../controllers/user.controller.js';
+import { get_home } from '../controllers/home.controller.js';
 
 const router = express.Router();
 
@@ -44,5 +45,6 @@ router.post('/signupOtpVerify', verify_email);
 router.get('/termsPolicies', get_terms_policies);
 router.get('/userGetProfileData', verify_token, get_profile);
 router.post('/userUpdateProfile', verify_token, Image_upload, update_user);
+router.get('/home', verify_token, get_home);
 
 export default router;

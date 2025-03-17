@@ -54,6 +54,11 @@ export async function up(queryInterface, Sequelize) {
       allowNull: false,
       defaultValue: '',
     },
+    subscription: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false,
+    },
     createdAt: {
       type: Sequelize.DATE,
       allowNull: false,
