@@ -14,11 +14,11 @@ export async function up(queryInterface, Sequelize) {
       unique: true,
     },
     ai_images: {
-      type: Sequelize.STRING,
+      type: Sequelize.TEXT,
       allowNull: false,
     },
     furniture_data: {
-      type: Sequelize.STRING,
+      type: Sequelize.TEXT,
       allowNull: false,
     },
     createdAt: {

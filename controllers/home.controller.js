@@ -13,7 +13,7 @@ export const get_home = async (req, res) => {
     const select_your_furniture = await Select_your_furniture.findAll();
     return res.status(200).json({
       status_code: 200,
-      message: 'Help Support retrieved successfully',
+      message: 'Home data retrieved successfully',
       data: {
         is_paid: 'true', // Adjust if needed or derive from logic
         sections: [

@@ -18,11 +18,11 @@ Device_count.init(
       unique: true,
     },
     ai_images: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: false,
     },
     furniture_data: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: false,
     },
   },
