@@ -32,7 +32,7 @@ router.post('/setDeviceCount', set_device_count);
 router.get('/getCount/:id', get_device_count);
 router.get('/getHelpSupport', get_help_support_data);
 router.post('/login', login);
-router.post('/logout', verify_token, logout);
+router.get('/logout', verify_token, logout);
 router.post('/refreshToken', refresh_token);
 router.get('/notification', verify_token, get_notifications);
 router.post('/deleteNotification', verify_token, delete_notifications);
