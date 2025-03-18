@@ -9,7 +9,7 @@ export async function up(queryInterface, Sequelize) {
       allowNull: false,
     },
     is_paid: {
-      type: Sequelize.STRING,
+      type: Sequelize.BOOLEAN,
       allowNull: false,
     },
     modern: {

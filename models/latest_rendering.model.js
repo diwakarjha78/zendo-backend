@@ -12,7 +12,7 @@ Latest_rendering.init(
       allowNull: false,
     },
     is_paid: {
-      type: DataTypes.STRING,
+      type: DataTypes.BOOLEAN,
       allowNull: false,
     },
     modern: {

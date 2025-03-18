@@ -59,6 +59,11 @@ export async function up(queryInterface, Sequelize) {
       allowNull: false,
       defaultValue: false,
     },
+    is_active: {
+      type: Sequelize.BOOLEAN,
+      allowNull: false,
+      defaultValue: true,
+    },
     createdAt: {
       type: Sequelize.DATE,
       allowNull: false,

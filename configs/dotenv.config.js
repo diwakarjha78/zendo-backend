@@ -27,3 +27,8 @@ export const MAIL_PORT = process.env.MAIL_PORT || 587;
 export const MAIL_HOST = process.env.MAIL_HOST;
 export const MAIL_USER = process.env.MAIL_USER;
 export const MAIL_PASS = process.env.MAIL_PASS;
+
+// Social Login
+export const APPLE_CLIENT_ID = process.env.APPLE_CLIENT_ID;
+export const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
+export const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
