@@ -84,9 +84,47 @@ export const delete_notifications = async (req, res) => {
         status_code: 404,
         message: 'No notification were found for the provided IDs',
       });
+
+    const notifications = await Notification.findAll({
+      where: { userId: req.user.id }, // Adjust field name as per your model
+      order: [['notification_date', 'DESC']],
+    });
+    if (!notifications.length) {
+      return res.status(200).json({
+        status_code: 200,
+        message: 'Notification deleted succesfully',
+        data: [],
+      });
+    }
+    // Group notifications by date
+    const grouped_notifications = notifications.reduce((acc, notif) => {
+      const date_key = new Date(notif.notification_date).toISOString().split('T')[0];
+      // Extract date only
+
+      if (!acc[date_key]) {
+        acc[date_key] = {
+          date: date_key,
+          list_name: 'User Notifications',
+          notifications: [],
+        };
+      }
+
+      acc[date_key].notifications.push({
+        id: notif.id,
+        message: notif.message,
+        title: notif.title,
+        notification_image_url: notif.notification_image_url,
+      });
+
+      return acc;
+    }, {});
+
+    // Convert grouped object into an array
+    const response_array = Object.values(grouped_notifications);
     return res.status(200).json({
       status_code: 200,
       message: 'Notification deleted succesfully',
+      data: response_array,
     });
   } catch (error) {
     return res.status(200).json({
