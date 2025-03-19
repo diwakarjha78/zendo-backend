@@ -20,6 +20,7 @@ import { get_terms_policies } from '../controllers/terms_policies.controller.js'
 import { get_profile, update_user } from '../controllers/user.controller.js';
 import { get_home } from '../controllers/home.controller.js';
 import { upload_rendering_image, get_rendering_image } from '../controllers/rendering_image.controller.js';
+import { upload_swipe_preference_image, get_swipe_preference_images } from '../controllers/swipe_preference_image.controller.js';
 
 const router = express.Router();
 
@@ -50,5 +51,7 @@ router.post('/userUpdateProfile', verify_token, Image_upload, update_user);
 router.get('/home', verify_token, get_home);
 router.post('/uploadRenderingImage', verify_token, upload_rendering_image);
 router.get('/getRenderingImage', verify_token, get_rendering_image);
+router.post('/uploadSwipePreferenceImage', Image_upload, upload_swipe_preference_image);
+router.get('/getSwipePreferenceImage', get_swipe_preference_images);
 
 export default router;
