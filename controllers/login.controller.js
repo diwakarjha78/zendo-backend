@@ -28,6 +28,17 @@ export const login = async (req, res) => {
         },
       });
     }
+
+    if (!user.is_active) {
+      return res.status(200).json({
+        status_code: 403,
+        message: 'Your account is inactive. Please contact admin.',
+        error: {
+          email: email,
+        },
+      });
+    }
+
     const is_match = await compare_password(password, user.password);
 
     if (!is_match) {
