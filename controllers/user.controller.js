@@ -115,6 +115,9 @@ export const soft_delete_user = async (req, res) => {
         id: user.id,
         email: user.email,
       },
+      attributes: {
+        exclude: ['password'],
+      },
     });
 
     if (!user_data) {
