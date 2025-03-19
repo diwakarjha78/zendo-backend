@@ -17,7 +17,7 @@ import { add_payment } from '../controllers/payment.controller.js';
 import { get_privacy_policy } from '../controllers/privacy_policy.controller.js';
 import { create_user, generate_otp, verify_email } from '../controllers/signup.controller.js';
 import { get_terms_policies } from '../controllers/terms_policies.controller.js';
-import { get_profile, update_user } from '../controllers/user.controller.js';
+import { get_profile, update_user, soft_delete_user } from '../controllers/user.controller.js';
 import { get_home } from '../controllers/home.controller.js';
 import { upload_rendering_image, get_rendering_image } from '../controllers/rendering_image.controller.js';
 import { upload_swipe_preference_image, get_swipe_preference_images } from '../controllers/swipe_preference_image.controller.js';
@@ -53,5 +53,6 @@ router.post('/uploadRenderingImage', verify_token, upload_rendering_image);
 router.get('/getRenderingImage', verify_token, get_rendering_image);
 router.post('/uploadSwipePreferenceImage', Image_upload, upload_swipe_preference_image);
 router.get('/getSwipePreferenceImage', get_swipe_preference_images);
+router.get('/deleteUser', verify_token, soft_delete_user);
 
 export default router;

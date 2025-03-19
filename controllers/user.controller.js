@@ -105,3 +105,39 @@ export const get_profile = async (req, res) => {
     });
   }
 };
+
+export const soft_delete_user = async (req, res) => {
+  const user = req.user;
+  try {
+    // Find the user by id and email
+    const user_data = await User.findOne({
+      where: {
+        id: user.id,
+        email: user.email,
+      },
+    });
+
+    if (!user_data) {
+      return res.status(200).json({
+        status_code: 404,
+        message: 'User not found',
+      });
+    }
+
+    // Soft delete by setting is_active to false
+    await user_data.update({ is_active: false });
+
+    return res.status(200).json({
+      status_code: 200,
+      message: 'User has been soft deleted (set as inactive)',
+      data: user_data,
+    });
+  } catch (error) {
+    console.error('Error performing soft delete for user: ', error);
+    return res.status(200).json({
+      status_code: 500,
+      message: 'Internal server error',
+      error: error.message,
+    });
+  }
+};
