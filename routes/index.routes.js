@@ -54,10 +54,10 @@ router.get('/getRenderingImage', verify_token, get_rendering_image);
 router.post('/uploadSwipePreferenceImage', Image_upload, upload_swipe_preference_image);
 router.get('/getSwipePreferenceImage', get_swipe_preference_images);
 router.get('/deleteUser', verify_token, soft_delete_user);
-router.post('/uploadLatestRendering', create_latest_rendering);
-router.post('/uploadSelectYourBudget', create_select_your_budget);
-router.post('/uploadSelectYourRoom', create_select_your_room);
-router.post('/uploadSelectYourStyle', create_select_your_style);
-router.post('/uploadSelectYourFurniture', create_select_your_furniture);
+router.post('/uploadLatestRendering', Image_upload, create_latest_rendering);
+router.post('/uploadSelectYourBudget', Image_upload, create_select_your_budget);
+router.post('/uploadSelectYourRoom', Image_upload, create_select_your_room);
+router.post('/uploadSelectYourStyle', Image_upload, create_select_your_style);
+router.post('/uploadSelectYourFurniture', Image_upload, create_select_your_furniture);
 
 export default router;
