@@ -36,6 +36,15 @@ export const verify_token = async (req, res, next) => {
         message: 'User not found. Invalid token',
       });
     }
+    if (!user.is_active) {
+      return res.status(200).json({
+        status_code: 403,
+        message: 'Your account is inactive. Please contact admin.',
+        error: {
+          email: email,
+        },
+      });
+    }
     // 5. Attach user details to `req.user` and proceed
     req.user = user;
     next();
