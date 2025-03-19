@@ -3,6 +3,7 @@ import Select_your_room from '../models/select_your_room.model.js';
 import Select_your_style from '../models/select_your_style.model.js';
 import Select_your_budget from '../models/select_your_budget.model.js';
 import Select_your_furniture from '../models/select_your_furniture.model.js';
+import { BASE_URL } from '../configs/dotenv.config.js';
 
 export const get_home = async (req, res) => {
   try {
