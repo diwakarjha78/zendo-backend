@@ -7,8 +7,8 @@ export const create_user = async (req, res) => {
   try {
     const { username, email, mobile, password, fcm_token, provider } = req.body;
 
-    if (provider != "local") {
-      if (provider == "google") {
+    if (provider != 'local') {
+      if (provider == 'google') {
         const { provider_id } = req.body;
         const existing_user = await User.findOne({ where: { provider_id } });
         if (existing_user && !existing_user.is_active) {
@@ -50,6 +50,7 @@ export const create_user = async (req, res) => {
           mobile: mobile ? mobile : '',
           provider: 'google',
           provider_id: provider_id,
+          password: '',
           fcm_token: fcm_token ? fcm_token : '',
         });
         const token = generate_token(new_user);
