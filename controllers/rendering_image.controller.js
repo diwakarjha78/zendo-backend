@@ -55,3 +55,46 @@ export const get_rendering_image = async (req, res) => {
     });
   }
 };
+
+export const delete_rendering_image = async (req, res) => {
+  try {
+    const rendering_image_ids = req.body;
+
+    if (!Array.isArray(rendering_image_ids) || rendering_image_ids.length === 0) {
+      return res.status(200).json({
+        status_code: 400,
+        message: 'Invalid request. Please provide at least one rendering image ID.',
+      });
+    }
+
+    // Delete records matching the provided IDs
+    const deleted_count = await Rendering_image.destroy({
+      where: { id: rendering_image_ids },
+    });
+
+    if (!deleted_count) {
+      return res.status(200).json({
+        status_code: 404,
+        message: 'No rendering images were found for the provided IDs.',
+      });
+    }
+
+    // Retrieve remaining rendering images, sorted by creation date (latest first)
+    const images = await Rendering_image.findAll({
+      order: [['createdAt', 'DESC']],
+    });
+
+    return res.status(200).json({
+      status_code: 200,
+      message: 'Rendering images deleted successfully',
+      data: images,
+    });
+  } catch (error) {
+    console.error('Error while deleting rendering images:', error);
+    return res.status(200).json({
+      status_code: 500,
+      message: 'Error while deleting rendering images',
+      error: error.message,
+    });
+  }
+};
