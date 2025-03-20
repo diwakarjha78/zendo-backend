@@ -19,7 +19,7 @@ import { create_user, generate_otp, verify_email } from '../controllers/signup.c
 import { get_terms_policies } from '../controllers/terms_policies.controller.js';
 import { get_profile, update_user, soft_delete_user } from '../controllers/user.controller.js';
 import { get_home, create_latest_rendering, create_select_your_budget, create_select_your_room, create_select_your_style, create_select_your_furniture } from '../controllers/home.controller.js';
-import { upload_rendering_image, get_rendering_image } from '../controllers/rendering_image.controller.js';
+import { upload_rendering_image, get_rendering_image, delete_rendering_image } from '../controllers/rendering_image.controller.js';
 import { upload_swipe_preference_image, get_swipe_preference_images } from '../controllers/swipe_preference_image.controller.js';
 
 const router = express.Router();
@@ -51,6 +51,7 @@ router.post('/userUpdateProfile', verify_token, Image_upload, update_user);
 router.get('/home', verify_token, get_home);
 router.post('/uploadRenderingImage', verify_token, upload_rendering_image);
 router.get('/getRenderingImage', verify_token, get_rendering_image);
+router.post('/deleteRenderingImage', verify_token, delete_rendering_image);
 router.post('/uploadSwipePreferenceImage', Image_upload, upload_swipe_preference_image);
 router.get('/getSwipePreferenceImage', get_swipe_preference_images);
 router.get('/deleteUser', verify_token, soft_delete_user);
