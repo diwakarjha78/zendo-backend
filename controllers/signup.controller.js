@@ -10,7 +10,7 @@ export const create_user = async (req, res) => {
     if (provider != 'local') {
       if (provider == 'google') {
         const { provider_id } = req.body;
-        const existing_user = await User.findOne({ where: { provider_id } });
+        const existing_user = await User.findOne({ where: { email } });
         if (existing_user && !existing_user.is_active) {
           return res.status(200).json({
             status_code: 403,
@@ -28,6 +28,8 @@ export const create_user = async (req, res) => {
               token: token,
               fcm_token: fcm_token?.trim() || '',
               refresh_token: refresh_token,
+              provider: "google",
+              provider_id: provider_id,
             },
             {
               where: { id: existing_user.id },
