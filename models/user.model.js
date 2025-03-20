@@ -32,7 +32,7 @@ User.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    googleId: {
+    provider_id: {
       type: DataTypes.STRING,
       allowNull: true,
       unique: true,

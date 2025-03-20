@@ -5,7 +5,67 @@ import User from '../models/user.model.js';
 
 export const create_user = async (req, res) => {
   try {
-    const { username, email, mobile, password, fcm_token } = req.body;
+    const { username, email, mobile, password, fcm_token, provider } = req.body;
+
+    if (provider != local) {
+      if (provider == google) {
+        const { provider_id } = req.body;
+        const existing_user = await User.findOne({ where: { provider_id } });
+        if (existing_user && !existing_user.is_active) {
+          return res.status(200).json({
+            status_code: 403,
+            message: 'Your account is inactive. Please contact admin.',
+            error: {
+              email: email,
+            },
+          });
+        }
+        if (existing_user) {
+          const token = generate_token(existing_user);
+          const refresh_token = generate_refresh_token(existing_user);
+          await User.update(
+            {
+              token: token,
+              fcm_token: fcm_token?.trim() || '',
+              refresh_token: refresh_token,
+            },
+            {
+              where: { id: existing_user.id },
+            }
+          );
+          // First, get the updated user data
+          const updated_user = await User.findOne({
+            where: { id: existing_user.id },
+            attributes: { exclude: ['password'] },
+          });
+          return res.status(200).json({
+            status_code: 200,
+            message: 'Login Successful',
+            data: updated_user,
+          });
+        }
+        const new_user = await User.create({
+          username,
+          email,
+          mobile: mobile ? mobile : '',
+          provider: 'google',
+          provider_id: provider_id,
+          fcm_token: fcm_token ? fcm_token : '',
+        });
+        const token = generate_token(new_user);
+        const refresh_token = generate_refresh_token(new_user);
+        await new_user.update({ token, refresh_token: refresh_token });
+        const updated_user = await User.findOne({
+          where: { id: new_user.id },
+          attributes: { exclude: ['password'] },
+        });
+        res.status(200).json({
+          status_code: 200,
+          message: 'User has been created successfully',
+          data: updated_user,
+        });
+      }
+    }
 
     if (!password) {
       return res.status(200).json({
