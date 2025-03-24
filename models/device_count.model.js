@@ -22,7 +22,7 @@ Device_count.init(
       allowNull: false,
     },
     furniture_data: {
-      type: DataTypes.TEXT,
+      type: DataTypes.TEXT('long'),
       allowNull: false,
     },
   },

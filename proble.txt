@@ -1,3 +1,1 @@
-1. added migration - rendering images
-2. rendring image controller
-3. rendering image model
+1. change in device count model and migrations
