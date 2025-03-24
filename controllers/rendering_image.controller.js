@@ -1,3 +1,4 @@
+import User from '../models/user.model.js';
 import Rendering_image from '../models/rendering_image.model.js';
 
 export const upload_rendering_image = async (req, res) => {
@@ -28,15 +29,16 @@ export const upload_rendering_image = async (req, res) => {
 
 export const get_rendering_image = async (req, res) => {
   try {
-    // Retrieve all rendering images, sorted by creation date (latest first)
+    // If you only want images for the logged-in user, use a `where` clause:
     const images = await Rendering_image.findAll({
+      where: { user_id: req.user.id }, // only that user's images
       order: [['createdAt', 'DESC']],
     });
 
     if (!images || images.length === 0) {
       return res.status(200).json({
         status_code: 404,
-        message: 'No rendering images found',
+        message: 'No rendering images found for this user',
         data: [],
       });
     }

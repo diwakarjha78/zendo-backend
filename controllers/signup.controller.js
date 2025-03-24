@@ -28,7 +28,7 @@ export const create_user = async (req, res) => {
               token: token,
               fcm_token: fcm_token?.trim() || '',
               refresh_token: refresh_token,
-              provider: "google",
+              provider: 'google',
               provider_id: provider_id,
             },
             {

@@ -1,3 +1,4 @@
+import User from '../models/user.model.js';
 import { Model, DataTypes } from 'sequelize';
 import { sequelize } from '../configs/db.config.js';
 
@@ -21,6 +22,10 @@ Rendering_image.init(
       allowNull: false,
       defaultValue: '',
     },
+    user_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
   },
   {
     sequelize,
@@ -29,5 +34,10 @@ Rendering_image.init(
     timestamps: true,
   }
 );
+
+Rendering_image.belongsTo(User, {
+  foreignKey: 'user_id',
+  as: 'user',
+});
 
 export default Rendering_image;
