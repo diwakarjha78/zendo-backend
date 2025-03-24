@@ -10,8 +10,13 @@ export const upload_rendering_image = async (req, res) => {
         message: 'Data must be an array of objects',
       });
     }
+    const user_id = req.user.id; // the logged-in user’s ID
+    const bulkData = data.map((item) => ({
+      ...item,
+      user_id,
+    }));
     // Bulk create records from the array of objects
-    const created_records = await Rendering_image.bulkCreate(data);
+    const created_records = await Rendering_image.bulkCreate(bulkData);
     return res.status(200).json({
       status_code: 200,
       message: 'Data saved successfully',
