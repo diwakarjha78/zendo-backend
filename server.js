@@ -16,15 +16,16 @@ app.use(helmet());
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
+// Todo: comment out the limiter
 // Rate limiting configuration
-const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  max: 100,
-  message: {
-    error: 'Too many requests, please try again later.',
-  },
-});
-app.use(limiter);
+// const limiter = rateLimit({
+//   windowMs: 15 * 60 * 1000,
+//   max: 100,
+//   message: {
+//     error: 'Too many requests, please try again later.',
+//   },
+// });
+// app.use(limiter);
 
 // API Routes
 app.use('/api', router);
