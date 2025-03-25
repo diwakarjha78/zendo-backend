@@ -133,7 +133,7 @@ export const verify_forgot_password_otp = async (req, res) => {
     // Check if OTP exists and is valid
     if (!verify) {
       return res.status(200).json({
-        status_code: 422,
+        status_code: 400,
         message: 'Invalid OTP',
         error: {
           email: email,
