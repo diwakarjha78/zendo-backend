@@ -21,6 +21,13 @@ import { get_profile, update_user, soft_delete_user } from '../controllers/user.
 import { get_home, create_latest_rendering, create_select_your_budget, create_select_your_room, create_select_your_style, create_select_your_furniture } from '../controllers/home.controller.js';
 import { upload_rendering_image, get_rendering_image, delete_rendering_image } from '../controllers/rendering_image.controller.js';
 import { upload_swipe_preference_image, get_swipe_preference_images } from '../controllers/swipe_preference_image.controller.js';
+import {
+  get_subscription_list,
+  get_subscription_by_id,
+  post_subscription,
+  update_subscription,
+  delete_subscription,
+} from '../controllers/subscription.controller.js';
 
 const router = express.Router();
 
@@ -60,5 +67,10 @@ router.post('/uploadSelectYourBudget', Image_upload, create_select_your_budget);
 router.post('/uploadSelectYourRoom', Image_upload, create_select_your_room);
 router.post('/uploadSelectYourStyle', Image_upload, create_select_your_style);
 router.post('/uploadSelectYourFurniture', Image_upload, create_select_your_furniture);
+router.get('/subscriptionList', get_subscription_list);
+router.get('/subscriptionList/:id', get_subscription_by_id);
+router.post('/subscription', Image_upload, post_subscription);
+router.put('/subscription/:id', Image_upload, update_subscription);
+router.delete('/subscription/:id', delete_subscription);
 
 export default router;
