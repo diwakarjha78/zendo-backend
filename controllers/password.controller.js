@@ -148,7 +148,7 @@ export const verify_forgot_password_otp = async (req, res) => {
       });
 
       return res.status(200).json({
-        status_code: 422,
+        status_code: 400,
         message: 'OTP has expired',
         error: {
           email: email,
