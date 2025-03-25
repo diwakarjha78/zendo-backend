@@ -109,7 +109,14 @@ export const create_user = async (req, res) => {
       message: 'User has been created successfully',
       data: updated_user,
     });
-  } export const create_user = async (req, res) =>
+  } catch (error) {
+    console.log('Error while creating User', error);
+    return res.status(200).json({
+      status_code: 500,
+      message: 'Error while creating the User',
+      error: error.message,
+    });
+  }
 };
 
 export const generate_otp = async (req, res) => {
