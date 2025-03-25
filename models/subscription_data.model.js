@@ -1,6 +1,6 @@
 import { Model, DataTypes } from 'sequelize';
 import { sequelize } from '../configs/db.config.js';
-import Subscription from './Subscription.js';
+import Subscription from './Subscription.model.js';
 
 class Subscription_data extends Model {}
 

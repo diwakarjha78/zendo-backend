@@ -8,7 +8,7 @@ Subscription_data.belongsTo(Subscription, { foreignKey: 'subscription_id', as: '
 export const get_subscription_list = async (req, res) => {
   try {
     const subscriptions = await Subscription.findAll({
-      include: [{ model: DataItem, as: 'data' }],
+      include: [{ model: Subscription_data, as: 'data' }],
     });
     if (!subscriptions || subscriptions.length === 0) {
       return res.status(200).json({
@@ -57,7 +57,7 @@ export const get_subscription_by_id = async (req, res) => {
   }
 };
 
-export const post_susbcription = async (req, res) => {
+export const post_subscription = async (req, res) => {
   try {
     const { text, trial_day, data } = req.body;
     const file = req.file;
