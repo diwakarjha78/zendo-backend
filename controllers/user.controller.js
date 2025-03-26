@@ -144,3 +144,31 @@ export const soft_delete_user = async (req, res) => {
     });
   }
 };
+
+export const get_all_user = async (req, res) => {
+  try {
+    const all_users = await User.findAll({
+      order: [['createdAt', 'DESC']],
+      attributes: { exclude: ['password'] },
+    });
+    if (!all_users.length) {
+      return res.status(200).json({
+        status_code: 404,
+        message: 'No users found',
+        data: [],
+      });
+    }
+    return res.status(200).json({
+      status_code: 200,
+      message: 'Users retrieved successfully',
+      data: all_users,
+    });
+  } catch (error) {
+    console.error('Error getting all users ', error);
+    return res.status(200).json({
+      status_code: 500,
+      message: 'Internal server error',
+      error: error.message,
+    });
+  }
+}
