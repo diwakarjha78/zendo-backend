@@ -70,6 +70,11 @@ User.init(
       allowNull: false,
       defaultValue: true,
     },
+    is_admin: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: true,
+    },
   },
   {
     sequelize,
