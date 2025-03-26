@@ -4,7 +4,7 @@ export async function up(queryInterface, Sequelize) {
   await queryInterface.addColumn('users', 'is_admin', {
     type: Sequelize.BOOLEAN,
     allowNull: false,
-    defaultValue: true,
+    defaultValue: false,
   });
 }
 
