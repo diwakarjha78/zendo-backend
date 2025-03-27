@@ -107,17 +107,15 @@ export const get_profile = async (req, res) => {
 };
 
 export const soft_delete_user = async (req, res) => {
-  const user = req.user;
   try {
-    // Find the user by id and email
+    const target_user_id = req.query.userId ? req.query.userId : req.user.id;
+    const where_condition = req.query.userId
+      ? { id: target_user_id }
+      : { id: target_user_id, email: req.user.email };
+
     const user_data = await User.findOne({
-      where: {
-        id: user.id,
-        email: user.email,
-      },
-      attributes: {
-        exclude: ['password'],
-      },
+      where: where_condition,
+      attributes: { exclude: ['password'] },
     });
 
     if (!user_data) {
@@ -127,12 +125,33 @@ export const soft_delete_user = async (req, res) => {
       });
     }
 
+    if (user_data.is_admin) {
+      if (Number(target_user_id) === Number(req.user.id)) {
+        return res.status(200).json({
+          status_code: 403,
+          message: "Admin can't delete their own account.",
+        });
+      }
+
+      // For deleting another admin, ensure at least one admin remains.
+      const admin_count = await User.count({
+        where: { is_admin: true },
+      });
+
+      if (admin_count <= 1) {
+        return res.status(200).json({
+          status_code: 403,
+          message: 'At least one admin must remain. Cannot delete the only admin account.',
+        });
+      }
+    }
+
     // Soft delete by setting is_active to false
     await user_data.update({ is_active: false });
 
     return res.status(200).json({
       status_code: 200,
-      message: 'User has been soft deleted (set as inactive)',
+      message: `${user_data.username} has been soft deleted (set as inactive)`,
       data: user_data,
     });
   } catch (error) {
@@ -144,6 +163,7 @@ export const soft_delete_user = async (req, res) => {
     });
   }
 };
+
 
 export const get_all_user = async (req, res) => {
   try {
