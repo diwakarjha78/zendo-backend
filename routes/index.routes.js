@@ -94,10 +94,10 @@ router.get('/subscriptionList/:id', get_subscription_by_id);
 router.post('/subscription', Image_upload, post_subscription);
 router.put('/subscription/:id', Image_upload, update_subscription);
 router.delete('/subscription/:id', delete_subscription);
-router.post('/', create_user_swipe_preference);
-router.get('/', get_all_user_swipe_preferences);
-router.get('/:id', get_user_swipe_preference_by_id);
-router.put('/:id', update_user_swipe_preference);
-router.delete('/:id', delete_user_swipe_preference);
+router.post('/createUserSwipePreference', create_user_swipe_preference);
+router.get('/getAllUserSwipePreference', get_all_user_swipe_preferences);
+router.get('/getUserSwipePreferenceById/:id', get_user_swipe_preference_by_id);
+router.put('/updateUserSwipePreference/:id', update_user_swipe_preference);
+router.delete('/deleteUserSwipePreference/:id', delete_user_swipe_preference);
 
 export default router;
