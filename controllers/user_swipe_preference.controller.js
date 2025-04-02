@@ -12,7 +12,25 @@ export const create_user_swipe_preference = async (req, res) => {
         message: 'Missing required fields: user_id, image_id, and liked are required.',
       });
     }
+    // Check if image_id exists in Swipe_preference_image table
+    const image_exists = await Swipe_preference_image.findByPk(image_id);
+    if (!image_exists) {
+      return res.status(200).json({
+        status_code: 404,
+        message: 'Invalid image_id: The image does not exist.',
+      });
+    }
+    // Check if the user has already swiped on this image
+    const existing_preference = await User_swipe_preference.findOne({
+      where: { user_id, image_id },
+    });
 
+    if (existing_preference) {
+      return res.status(200).json({
+        status_code: 409,
+        message: 'User has already swiped on this image.',
+      });
+    }
     const new_preference = await User_swipe_preference.create({ user_id, image_id, liked });
     return res.status(200).json({
       status_code: 200,
