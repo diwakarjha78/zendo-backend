@@ -5,64 +5,79 @@ export const main_budget_estimation = async (req, res) => {
   try {
     const { title, pricelist } = req.body;
     const file = req.file;
+
+    // Validate file existence
     if (!file) {
-      return res.status(200).json({
+      return res.status(400).json({
         status_code: 400,
         message: 'Image is required',
       });
     }
-    // Input validation
+
+    // Validate title
     if (!title?.trim()) {
-      return res.status(200).json({
+      return res.status(400).json({
         status_code: 400,
         message: 'Title is required',
       });
     }
-    if (!pricelist || !Array.isArray(pricelist) || pricelist.length === 0) {
-      return res.status(200).json({
+
+    // Validate and parse pricelist
+    let pricelistArray = pricelist;
+    if (typeof pricelist === 'string') {
+      try {
+        pricelistArray = JSON.parse(pricelist);
+      } catch (e) {
+        return res.status(400).json({
+          status_code: 400,
+          message: 'Pricelist is not a valid JSON array',
+        });
+      }
+    }
+    if (!Array.isArray(pricelistArray) || pricelistArray.length === 0) {
+      return res.status(400).json({
         status_code: 400,
         message: 'Pricelist must be a non-empty array',
       });
     }
-    if (!pricelist.every((item) => typeof item === 'string')) {
-      return res.status(200).json({
+    if (!pricelistArray.every((item) => typeof item === 'string')) {
+      return res.status(400).json({
         status_code: 400,
         message: 'Pricelist must contain only strings',
       });
     }
-    let image_url;
-    if (file) {
-      image_url = `${BASE_URL}/api/images/${file.filename}`;
-    }
+
+    // Construct image URL
+    const image_url = `${BASE_URL}/api/images/${file.filename}`;
 
     // Check if we already have a record
     const existing_record = await Budget_estimation.findOne();
-
     let budget_estimation;
 
     if (existing_record) {
       // Update existing record
       await existing_record.update({
         title: title.trim(),
-        pricelist,
-        image_url: image_url,
+        pricelist: pricelistArray,
+        image_url,
       });
-
       // Get the updated record
       budget_estimation = await Budget_estimation.findOne();
     } else {
       // Create first record
       budget_estimation = await Budget_estimation.create({
         title: title.trim(),
-        pricelist,
-        image_url: image_url,
+        pricelist: pricelistArray,
+        image_url,
       });
     }
 
+    // If pricelist is stored as JSON string, parse it; otherwise use it as is.
     const parsed_price_list =
       typeof budget_estimation.pricelist === 'string'
         ? JSON.parse(budget_estimation.pricelist)
         : budget_estimation.pricelist;
+
     return res.status(200).json({
       status_code: 200,
       message: existing_record ? 'Budget estimation updated successfully' : 'Budget estimation created successfully',
@@ -74,7 +89,7 @@ export const main_budget_estimation = async (req, res) => {
     });
   } catch (error) {
     console.error('Error in budget estimation:', error);
-    return res.status(200).json({
+    return res.status(500).json({
       status_code: 500,
       message: 'Internal server error',
       error: error.message,
