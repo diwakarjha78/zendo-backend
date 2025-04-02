@@ -50,7 +50,7 @@ import {
   get_user_swipe_preference_by_id,
   update_user_swipe_preference,
 } from '../controllers/user_swipe_preference.controller.js';
-import { create_user_budget_estimation, get_user_budget_estimations } from '../controllers/user_budget_estimation.controller.js';
+import { create_user_budget_estimation, get_all_user_budget_estimations, get_user_budget_estimations } from '../controllers/user_budget_estimation.controller.js';
 
 const router = express.Router();
 
@@ -104,5 +104,6 @@ router.delete('/deleteUserSwipePreference/:id', delete_user_swipe_preference);
 router.get('/getAllUsersWithPreferences', get_all_users_with_preferences);
 router.post('/userBudgetEstimations', create_user_budget_estimation);
 router.get('/userBudgetEstimations', get_user_budget_estimations);
+router.get('/getAllUserBudgetEstimations', get_all_user_budget_estimations)
 
 export default router;

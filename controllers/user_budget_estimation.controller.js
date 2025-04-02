@@ -71,7 +71,7 @@ export const get_user_budget_estimations = async (req, res) => {
       status: item.status,
       image_url: item.Budget_estimation.image_url,
       username: item.User.username,
-      email: item.User.email
+      email: item.User.email,
     }));
 
     return res.status(200).json({
@@ -84,6 +84,57 @@ export const get_user_budget_estimations = async (req, res) => {
     return res.status(200).json({
       status_code: 500,
       message: 'Internal server error',
+      error: error.message,
+    });
+  }
+};
+
+export const get_all_user_budget_estimations = async (req, res) => {
+  try {
+    const users = await User.findAll({
+      include: [
+        {
+          model: User_budget_estimation,
+          attributes: ['image_id', 'status'],
+          include: [
+            {
+              model: Budget_estimation,
+              attributes: ['image_url'],
+            },
+          ],
+        },
+      ],
+    });
+    // Transform the data to match the desired structure.
+    const transformed_users = users.map((user) => {
+      const estimations = (user.User_budget_estimation || []).map((pref) => ({
+        image_id: pref.image_id,
+        status: pref.status,
+        image_url: pref.Budget_estimation?.image_url || null,
+      }));
+
+      return {
+        id: user.id,
+        username: user.username,
+        email: user.email,
+        mobile: user.mobile,
+        is_active: user.is_active,
+        createdAt: user.createdAt,
+        updatedAt: user.updatedAt,
+        estimations,
+      };
+    });
+
+    return res.status(200).json({
+      status_code: 200,
+      message: 'Users with swipe preferences retrieved successfully',
+      data: transformed_users,
+    });
+  } catch (error) {
+    console.error('rror retrieving all user budget estimations:', error);
+    return res.status(200).json({
+      status_code: 500,
+      message: 'Error retrieving all user budget estimations',
       error: error.message,
     });
   }
