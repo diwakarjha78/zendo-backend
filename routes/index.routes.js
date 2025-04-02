@@ -46,6 +46,7 @@ import {
   create_user_swipe_preference,
   delete_user_swipe_preference,
   get_all_user_swipe_preferences,
+  get_all_users_with_preferences,
   get_user_swipe_preference_by_id,
   update_user_swipe_preference,
 } from '../controllers/user_swipe_preference.controller.js';
@@ -99,5 +100,6 @@ router.get('/getAllUserSwipePreference', get_all_user_swipe_preferences);
 router.get('/getUserSwipePreferenceById/:id', get_user_swipe_preference_by_id);
 router.put('/updateUserSwipePreference/:id', update_user_swipe_preference);
 router.delete('/deleteUserSwipePreference/:id', delete_user_swipe_preference);
+router.get('/getAllUsersWithPreferences', get_all_users_with_preferences)
 
 export default router;
