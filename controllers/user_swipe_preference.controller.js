@@ -6,7 +6,7 @@ import Swipe_preference_image from '../models/swipe_preference_image.model.js';
 export const create_user_swipe_preference = async (req, res) => {
   try {
     const { user_id, image_id, liked } = req.body;
-    if (!user_id || !image_id || !liked) {
+    if (user_id == null || image_id == null || liked == null) {
       return res.status(200).json({
         status_code: 404,
         message: 'Missing required fields: user_id, image_id, and liked are required.',
