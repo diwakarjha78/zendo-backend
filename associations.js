@@ -6,6 +6,8 @@ import Subscription from './models/subscription.model.js';
 import Subscription_data from './models/subscription_data.model.js';
 import Notification from './models/notification.model.js';
 import Payment from './models/payment.model.js';
+import User_budget_estimation from './models/user_budget_estimation.model.js';
+import Budget_estimation from './models/budget_estimation.model.js';
 
 const define_association = () => {
     // Contact_us
@@ -29,6 +31,13 @@ const define_association = () => {
     // Payment
     User.hasMany(Payment, { foreignKey: 'user_id' });
     Payment.belongsTo(User, { foreignKey: 'user_id' });
+
+    // User Budget Estimation
+    User.hasMany(User_budget_estimation, { foreignKey: 'user_id', onDelete: 'CASCADE' });
+    User_budget_estimation.belongsTo(User, { foreignKey: 'user_id' });
+    Budget_estimation.hasMany(User_budget_estimation, { foreignKey: 'image_id', onDelete: 'CASCADE' });
+    User_budget_estimation.belongsTo(Budget_estimation, { foreignKey: 'image_id' });
+
 }
 
 export default define_association;
