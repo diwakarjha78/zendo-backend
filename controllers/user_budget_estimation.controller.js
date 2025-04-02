@@ -105,13 +105,15 @@ export const get_all_user_budget_estimations = async (req, res) => {
         },
       ],
     });
+
     // Transform the data to match the desired structure.
     const transformed_users = users.map((user) => {
-      const estimations = (user.User_budget_estimation || []).map((pref) => ({
-        image_id: pref.image_id,
-        status: pref.status,
-        image_url: pref.Budget_estimation?.image_url || null,
-      }));
+      const estimations =
+        user.User_budget_estimations?.map((pref) => ({
+          image_id: pref.image_id,
+          status: pref.status,
+          image_url: pref.Budget_estimation?.image_url || null,
+        })) || [];
 
       return {
         id: user.id,
@@ -127,12 +129,12 @@ export const get_all_user_budget_estimations = async (req, res) => {
 
     return res.status(200).json({
       status_code: 200,
-      message: 'Users with swipe preferences retrieved successfully',
+      message: 'All users budget estimations retrieved successfully',
       data: transformed_users,
     });
   } catch (error) {
-    console.error('rror retrieving all user budget estimations:', error);
-    return res.status(200).json({
+    console.error('Error retrieving all user budget estimations:', error);
+    return res.status(500).json({
       status_code: 500,
       message: 'Error retrieving all user budget estimations',
       error: error.message,
