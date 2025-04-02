@@ -48,8 +48,4 @@ Notification.init(
   }
 );
 
-// Define Association Here
-User.hasMany(Notification, { foreignKey: 'userId' });
-Notification.belongsTo(User, { foreignKey: 'userId' });
-
 export default Notification;

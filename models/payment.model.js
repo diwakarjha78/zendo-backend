@@ -48,8 +48,4 @@ Payment.init(
   }
 );
 
-// Define Relationship
-User.hasMany(Payment, { foreignKey: 'user_id' });
-Payment.belongsTo(User, { foreignKey: 'user_id' });
-
 export default Payment;

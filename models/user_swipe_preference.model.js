@@ -1,10 +1,11 @@
 import { Model, DataTypes } from 'sequelize';
 import { sequelize } from '../configs/db.config.js';
+import SwipePreferenceImage from './swipe_preference_image.model.js';
 import User from './user.model.js';
 
-class Contact_us extends Model {}
+class User_swipe_preference extends Model {}
 
-Contact_us.init(
+User_swipe_preference.init(
   {
     id: {
       type: DataTypes.INTEGER,
@@ -12,8 +13,7 @@ Contact_us.init(
       autoIncrement: true,
       allowNull: false,
     },
-    userId: {
-      // Foreign key linking to User model
+    user_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
@@ -22,33 +22,26 @@ Contact_us.init(
       },
       onDelete: 'CASCADE',
     },
-    full_name: {
-      type: DataTypes.STRING,
+    image_id: {
+      type: DataTypes.INTEGER,
       allowNull: false,
-    },
-    email: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        isEmail: true,
+      references: {
+        model: SwipePreferenceImage,
+        key: 'id',
       },
+      onDelete: 'CASCADE',
     },
-    mobile: {
-      type: DataTypes.STRING,
+    liked: {
+      type: DataTypes.BOOLEAN,
       allowNull: false,
-    },
-    message: {
-      type: DataTypes.TEXT,
-      allowNull: false,
-      defaultValue: '',
     },
   },
   {
     sequelize,
-    modelName: 'Contact_us',
-    tableName: 'contact_uss',
+    modelName: 'User_swipe_preference',
+    tableName: 'user_swipe_preferences',
     timestamps: true,
   }
 );
 
-export default Contact_us;
+export default User_swipe_preference;

@@ -3,8 +3,7 @@ import Subscription from '../models/subscription.model.js';
 import Subscription_data from '../models/subscription_data.model.js';
 
 // Define relationships
-Subscription.hasMany(Subscription_data, { as: 'data', foreignKey: 'subscription_id' });
-Subscription_data.belongsTo(Subscription, { foreignKey: 'subscription_id', as: 'subscription' });
+
 
 /**
  * GET the first subscription (instead of a list)

@@ -18,9 +18,23 @@ import { get_privacy_policy } from '../controllers/privacy_policy.controller.js'
 import { create_user, generate_otp, verify_email } from '../controllers/signup.controller.js';
 import { get_terms_policies } from '../controllers/terms_policies.controller.js';
 import { get_profile, update_user, soft_delete_user, get_all_user } from '../controllers/user.controller.js';
-import { get_home, create_latest_rendering, create_select_your_budget, create_select_your_room, create_select_your_style, create_select_your_furniture } from '../controllers/home.controller.js';
-import { upload_rendering_image, get_rendering_image, delete_rendering_image } from '../controllers/rendering_image.controller.js';
-import { upload_swipe_preference_image, get_swipe_preference_images } from '../controllers/swipe_preference_image.controller.js';
+import {
+  get_home,
+  create_latest_rendering,
+  create_select_your_budget,
+  create_select_your_room,
+  create_select_your_style,
+  create_select_your_furniture,
+} from '../controllers/home.controller.js';
+import {
+  upload_rendering_image,
+  get_rendering_image,
+  delete_rendering_image,
+} from '../controllers/rendering_image.controller.js';
+import {
+  upload_swipe_preference_image,
+  get_swipe_preference_images,
+} from '../controllers/swipe_preference_image.controller.js';
 import {
   get_subscription_list,
   get_subscription_by_id,
@@ -28,6 +42,13 @@ import {
   update_subscription,
   delete_subscription,
 } from '../controllers/subscription.controller.js';
+import {
+  create_user_swipe_preference,
+  delete_user_swipe_preference,
+  get_all_user_swipe_preferences,
+  get_user_swipe_preference_by_id,
+  update_user_swipe_preference,
+} from '../controllers/user_swipe_preference.controller.js';
 
 const router = express.Router();
 
@@ -73,5 +94,10 @@ router.get('/subscriptionList/:id', get_subscription_by_id);
 router.post('/subscription', Image_upload, post_subscription);
 router.put('/subscription/:id', Image_upload, update_subscription);
 router.delete('/subscription/:id', delete_subscription);
+router.post('/', create_user_swipe_preference);
+router.get('/', get_all_user_swipe_preferences);
+router.get('/:id', get_user_swipe_preference_by_id);
+router.put('/:id', update_user_swipe_preference);
+router.delete('/:id', delete_user_swipe_preference);
 
 export default router;
