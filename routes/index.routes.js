@@ -55,7 +55,7 @@ import { create_user_budget_estimation, get_user_budget_estimations } from '../c
 const router = express.Router();
 
 router.get('/aboutUs', get_about_us);
-router.post('/budgetEstimation', main_budget_estimation);
+router.post('/budgetEstimation', Image_upload, main_budget_estimation);
 router.get('/getBudgetEstimation', get_budget_estimation);
 router.get('/getContactDetails', get_contact_details);
 router.post('/userContactDetails', verify_token, contact_us_details);

@@ -1,9 +1,17 @@
 import Budget_estimation from '../models/budget_estimation.model.js';
+import { BASE_URL } from '../configs/dotenv.config.js';
 
 export const main_budget_estimation = async (req, res) => {
   try {
-    const { title, pricelist, image_url } = req.body;
-
+    const { title, pricelist } = req.body;
+    const file = req.file;
+    if (!file) {
+      return res.status(200).json({
+        status_code: 400,
+        message: 'Image is required',
+      });
+    }
+    const image_url = `${BASE_URL}/api/images/${file.filename}`;
     // Input validation
     if (!title?.trim()) {
       return res.status(200).json({
@@ -21,12 +29,6 @@ export const main_budget_estimation = async (req, res) => {
       return res.status(200).json({
         status_code: 400,
         message: 'Pricelist must contain only strings',
-      });
-    }
-    if (!image_url?.trim()) {
-      return res.status(400).json({
-        status_code: 400,
-        message: 'Image URL is required',
       });
     }
 
@@ -50,7 +52,7 @@ export const main_budget_estimation = async (req, res) => {
       budget_estimation = await Budget_estimation.create({
         title: title.trim(),
         pricelist,
-        image_url: image_url.trim(),
+        image_url: image_url,
       });
     }
 
