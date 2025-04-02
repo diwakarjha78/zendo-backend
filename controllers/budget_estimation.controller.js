@@ -11,7 +11,6 @@ export const main_budget_estimation = async (req, res) => {
         message: 'Image is required',
       });
     }
-    const image_url = `${BASE_URL}/api/images/${file.filename}`;
     // Input validation
     if (!title?.trim()) {
       return res.status(200).json({
@@ -31,6 +30,10 @@ export const main_budget_estimation = async (req, res) => {
         message: 'Pricelist must contain only strings',
       });
     }
+    let image_url;
+    if (file) {
+      image_url = `${BASE_URL}/api/images/${file.filename}`;
+    }
 
     // Check if we already have a record
     const existing_record = await Budget_estimation.findOne();
@@ -42,7 +45,7 @@ export const main_budget_estimation = async (req, res) => {
       await existing_record.update({
         title: title.trim(),
         pricelist,
-        image_url: image_url.trim(),
+        image_url: image_url,
       });
 
       // Get the updated record
