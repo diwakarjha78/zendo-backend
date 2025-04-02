@@ -7,6 +7,7 @@ import rateLimit from 'express-rate-limit';
 import { PORT } from './configs/dotenv.config.js';
 import { connect_db } from './configs/db.config.js';
 import { Image_upload_dir } from './helpers/path_dir.helper.js';
+import define_association from './associations.js';
 
 const app = express();
 
@@ -41,6 +42,7 @@ app.get('/', (req, res) => {
 const start_server = async () => {
   try {
     connect_db();
+    define_association();
     app.listen(PORT, () => {
       console.log(`Server is running on port: ${PORT}`);
     });
