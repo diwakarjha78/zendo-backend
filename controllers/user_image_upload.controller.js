@@ -58,9 +58,10 @@ export const get_all_users_image_uploads = async (req, res) => {
     });
     // Transform the data to match the desired structure.
     const transformed_users = users.map((user) => {
-      const images = (user.User_image_upload || []).map((pref) => ({
-        image_url: pref.User_image_upload?.image_url || '',
-      }));
+      // const images = (user.User_image_upload || []).map((pref) => ({
+      //   image_url: pref.User_image_upload?.image_url || '',
+      // }));
+      const image_url = user.User_image_upload?.image_url || "";
 
       return {
         id: user.id,
@@ -70,7 +71,7 @@ export const get_all_users_image_uploads = async (req, res) => {
         is_active: user.is_active,
         createdAt: user.createdAt,
         updatedAt: user.updatedAt,
-        images,
+        image_url: image_url,
       };
     });
     return res.status(200).json({
