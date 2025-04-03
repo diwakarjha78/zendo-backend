@@ -13,7 +13,7 @@ export const create_user_budget_estimation = async (req, res) => {
     }
     // Check if the user has already swiped on this image
     const existing_budget_estimation = await User_budget_estimation.findOne({
-      where: { user_id, status },
+      where: { user_id, image_id },
     });
     if (existing_budget_estimation) {
       return res.status(200).json({
