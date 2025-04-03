@@ -1,8 +1,108 @@
 import User from '../models/user.model.js';
 import Contact_us from '../models/contact_us.model.js';
 import Contact_details from '../models/contact_details.model.js';
+import { BASE_URL } from '../configs/dotenv.config.js';
 
+export const create_contact_details = async (req, res) => {
+  try {
+    const { email, mobile } = req.body;
+    if (!email || !mobile) {
+      return res.status(200).json({
+        status_code: 400,
+        message: 'Email and Mobile are required fields.',
+      });
+    }
+    const email_image_url = req.files['email_image']
+      ? `${BASE_URL}/uploads/images/${req.files['email_image'][0].filename}`
+      : '';
 
+    const mobile_image_url = req.files['mobile_image']
+      ? `${BASE_URL}/uploads/images/${req.files['mobile_image'][0].filename}`
+      : '';
+    const contact_details = await Contact_details.findOne();
+    if (contact_details) {
+      return res.status(200).json({
+        status_code: 409,
+        message: 'Contact details already exist.',
+      });
+    }
+    await Contact_details.create({
+      email,
+      email_image_url,
+      mobile,
+      mobile_image_url,
+    });
+    const new_contact_details = await Contact_details.findOne();
+    return res.status(200).json({
+      status_code: 200,
+      message: 'Contact details created successfully.',
+      data: new_contact_details,
+    });
+  } catch (error) {
+    return res.status(200).json({
+      status_code: 500,
+      message: 'Internal Server Error',
+      error: error.message,
+    });
+  }
+};
+
+export const update_contact_details = async (req, res) => {
+  try {
+    const { id, email, mobile } = req.body;
+    const contact = await Contact_details.findByPk(id);
+    if (!contact) {
+      return res.status(200).json({
+        status_code: 404,
+        message: 'Contact details not found.',
+      });
+    }
+    contact.email = email || contact.email;
+    contact.mobile = mobile || contact.mobile;
+    if (req.files['email_image']) {
+      contact.email_image_url = `${BASE_URL}/uploads/images/${req.files['email_image'][0].filename}`;
+    }
+    if (req.files['mobile_image']) {
+      contact.mobile_image_url = `${BASE_URL}/uploads/images/${req.files['mobile_image'][0].filename}`;
+    }
+    await contact.save();
+    return res.status(200).json({
+      status_code: 200,
+      message: 'Contact details updated successfully.',
+      data: contact,
+    });
+  } catch (error) {
+    return res.status(200).json({
+      status_code: 500,
+      message: 'Internal Server Error',
+      error: error.message,
+    });
+  }
+};
+
+export const delete_contact_details = async (req, res) => {
+  try {
+    const { id } = req.body;
+    const contact = await Contact_details.findByPk(id);
+    if (!contact) {
+      return res.status(200).json({
+        status_code: 404,
+        message: 'Contact details not found.',
+      });
+    }
+    await contact.destroy();
+    return res.status(200).json({
+      status_code: 200,
+      message: 'Contact details deleted successfully.',
+    });
+  } catch (error) {
+    return res.status(200).json({
+      status_code: 500,
+      message: 'Internal Server Error',
+      error: error.message,
+    });
+  }
+};
 
 export const get_contact_details = async (req, res) => {
   try {

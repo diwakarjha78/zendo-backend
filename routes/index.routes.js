@@ -1,8 +1,14 @@
 import express from 'express';
-import { Image_upload } from '../middlewares/upload.middleware.js';
+import { Contact_image_upload, Image_upload } from '../middlewares/upload.middleware.js';
 import { get_about_us } from '../controllers/about_us.controller.js';
 import { main_budget_estimation, get_budget_estimation } from '../controllers/budget_estimation.controller.js';
-import { get_contact_details, contact_us_details } from '../controllers/contact.controller.js';
+import {
+  get_contact_details,
+  contact_us_details,
+  create_contact_details,
+  update_contact_details,
+  delete_contact_details,
+} from '../controllers/contact.controller.js';
 import { verify_token } from '../middlewares/token.middleware.js';
 import { set_device_count, get_device_count } from '../controllers/device_count.controller.js';
 import { get_help_support_data } from '../controllers/help_support.controller.js';
@@ -50,7 +56,11 @@ import {
   get_user_swipe_preference_by_id,
   update_user_swipe_preference,
 } from '../controllers/user_swipe_preference.controller.js';
-import { create_user_budget_estimation, get_all_user_budget_estimations, get_user_budget_estimations } from '../controllers/user_budget_estimation.controller.js';
+import {
+  create_user_budget_estimation,
+  get_all_user_budget_estimations,
+  get_user_budget_estimations,
+} from '../controllers/user_budget_estimation.controller.js';
 
 const router = express.Router();
 
@@ -58,6 +68,9 @@ router.get('/aboutUs', get_about_us);
 router.post('/budgetEstimation', Image_upload, main_budget_estimation);
 router.get('/getBudgetEstimation', get_budget_estimation);
 router.get('/getContactDetails', get_contact_details);
+router.post('/createContactDetails', Contact_image_upload, create_contact_details);
+router.put('/updateContactDetails', Contact_image_upload, update_contact_details);
+router.delete('/deleteContactDetails', delete_contact_details);
 router.post('/userContactDetails', verify_token, contact_us_details);
 router.post('/setDeviceCount', set_device_count);
 router.get('/getCount/:id', get_device_count);
@@ -104,6 +117,6 @@ router.delete('/deleteUserSwipePreference/:id', delete_user_swipe_preference);
 router.get('/getAllUsersWithPreferences', get_all_users_with_preferences);
 router.post('/userBudgetEstimations', create_user_budget_estimation);
 router.get('/userBudgetEstimations', get_user_budget_estimations);
-router.get('/getAllUserBudgetEstimations', get_all_user_budget_estimations)
+router.get('/getAllUserBudgetEstimations', get_all_user_budget_estimations);
 
 export default router;
