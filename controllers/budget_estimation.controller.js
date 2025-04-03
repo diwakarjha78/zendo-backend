@@ -116,6 +116,7 @@ export const get_budget_estimation = async (req, res) => {
       status_code: 200,
       message: 'Budget estimation fetched successfully',
       data: {
+        id: budget_estimation.id,
         title: budget_estimation.title,
         image_url: budget_estimation.image_url,
         pricelist: parsed_price_list,

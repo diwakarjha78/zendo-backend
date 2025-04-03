@@ -2,6 +2,8 @@ import User from '../models/user.model.js';
 import Contact_us from '../models/contact_us.model.js';
 import Contact_details from '../models/contact_details.model.js';
 
+
+
 export const get_contact_details = async (req, res) => {
   try {
     const contact_details = await Contact_details.findOne();
