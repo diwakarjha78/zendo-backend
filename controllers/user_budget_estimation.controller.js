@@ -26,8 +26,8 @@ export const create_user_budget_estimation = async (req, res) => {
       image_id,
       status,
     });
-    return res.status(201).json({
-      status_code: 201,
+    return res.status(200).json({
+      status_code: 200,
       message: 'User Budget Estimation created successfully',
       data: new_user_budget_estimation,
     });
