@@ -61,6 +61,7 @@ import {
   get_all_user_budget_estimations,
   get_user_budget_estimations,
 } from '../controllers/user_budget_estimation.controller.js';
+import { create_user_image_upload, get_all_users_image_uploads } from '../controllers/user_image_upload.controller.js';
 
 const router = express.Router();
 
@@ -118,5 +119,7 @@ router.get('/getAllUsersWithPreferences', get_all_users_with_preferences);
 router.post('/userBudgetEstimations', create_user_budget_estimation);
 router.get('/userBudgetEstimations', get_user_budget_estimations);
 router.get('/getAllUserBudgetEstimations', get_all_user_budget_estimations);
+router.post('/createUserImageUpload', Image_upload, create_user_image_upload);
+router.get('/getAllUserImageUploads', get_all_users_image_uploads);
 
 export default router;

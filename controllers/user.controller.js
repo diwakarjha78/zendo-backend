@@ -109,9 +109,7 @@ export const get_profile = async (req, res) => {
 export const soft_delete_user = async (req, res) => {
   try {
     const target_user_id = req.query.userId ? req.query.userId : req.user.id;
-    const where_condition = req.query.userId
-      ? { id: target_user_id }
-      : { id: target_user_id, email: req.user.email };
+    const where_condition = req.query.userId ? { id: target_user_id } : { id: target_user_id, email: req.user.email };
 
     const user_data = await User.findOne({
       where: where_condition,
@@ -164,7 +162,6 @@ export const soft_delete_user = async (req, res) => {
   }
 };
 
-
 export const get_all_user = async (req, res) => {
   try {
     const all_users = await User.findAll({
@@ -191,4 +188,4 @@ export const get_all_user = async (req, res) => {
       error: error.message,
     });
   }
-}
+};

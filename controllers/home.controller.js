@@ -13,12 +13,12 @@ export const get_home = async (req, res) => {
     const select_your_style = await Select_your_style.findAll();
     const select_your_budget = await Select_your_budget.findAll();
     const select_your_furniture = await Select_your_furniture.findAll();
-    const is_subscribed = user ? (user.subscription ? "true" : "false") : "false";
+    const is_subscribed = user ? (user.subscription ? 'true' : 'false') : 'false';
     return res.status(200).json({
       status_code: 200,
       message: 'Home data retrieved successfully',
       data: {
-        is_paid : is_subscribed, 
+        is_paid: is_subscribed,
         sections: [
           {
             heading: 'Lastest Rendering',
@@ -56,8 +56,8 @@ export const create_latest_rendering = async (req, res) => {
   try {
     const user = req.user;
     const { modern, product_alpha } = req.body;
-    
-    const is_subscribed = user ? (user.subscription ? "true" : "false") : "false";
+
+    const is_subscribed = user ? (user.subscription ? 'true' : 'false') : 'false';
     const file = req.file;
     if (!file) {
       return res.status(200).json({
@@ -88,14 +88,14 @@ export const create_latest_rendering = async (req, res) => {
       error: error.message,
     });
   }
-}
+};
 
 export const create_select_your_budget = async (req, res) => {
   try {
     const user = req.user;
     const { budget_low, product_alpha } = req.body;
 
-    const is_subscribed = user ? (user.subscription ? "true" : "false") : "false";
+    const is_subscribed = user ? (user.subscription ? 'true' : 'false') : 'false';
     const file = req.file;
     if (!file) {
       return res.status(200).json({
@@ -126,14 +126,14 @@ export const create_select_your_budget = async (req, res) => {
       error: error.message,
     });
   }
-}
+};
 
 export const create_select_your_room = async (req, res) => {
   try {
     const user = req.user;
     const { selectroom, product_alpha } = req.body;
 
-    const is_subscribed = user ? (user.subscription ? "true" : "false") : "false";
+    const is_subscribed = user ? (user.subscription ? 'true' : 'false') : 'false';
     const file = req.file;
     if (!file) {
       return res.status(200).json({
@@ -164,14 +164,14 @@ export const create_select_your_room = async (req, res) => {
       error: error.message,
     });
   }
-}
+};
 
 export const create_select_your_style = async (req, res) => {
   try {
     const user = req.user;
     const { model, product_alpha } = req.body;
 
-    const is_subscribed = user ? (user.subscription ? "true" : "false") : "false";
+    const is_subscribed = user ? (user.subscription ? 'true' : 'false') : 'false';
     const file = req.file;
     if (!file) {
       return res.status(200).json({
@@ -202,14 +202,14 @@ export const create_select_your_style = async (req, res) => {
       error: error.message,
     });
   }
-}
+};
 
 export const create_select_your_furniture = async (req, res) => {
   try {
     const user = req.user;
     const { package_name, product_alpha } = req.body;
 
-    const is_subscribed = user ? (user.subscription ? "true" : "false") : "false";
+    const is_subscribed = user ? (user.subscription ? 'true' : 'false') : 'false';
     const file = req.file;
     if (!file) {
       return res.status(200).json({
@@ -240,4 +240,4 @@ export const create_select_your_furniture = async (req, res) => {
       error: error.message,
     });
   }
-}
+};

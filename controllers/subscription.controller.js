@@ -4,7 +4,6 @@ import Subscription_data from '../models/subscription_data.model.js';
 
 // Define relationships
 
-
 /**
  * GET the first subscription (instead of a list)
  */

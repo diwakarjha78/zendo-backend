@@ -148,7 +148,7 @@ export const logout = async (req, res) => {
     }
 
     // Clear token and refresh_token
-    await User.update({ token: "", refresh_token: "" }, { where: { id: user.id } });
+    await User.update({ token: '', refresh_token: '' }, { where: { id: user.id } });
 
     return res.status(200).json({
       status_code: 200,

@@ -6,8 +6,8 @@ export async function up(queryInterface, Sequelize) {
     type: Sequelize.INTEGER,
     allowNull: false,
     references: {
-      model: 'users',   // name of your "users" table
-      key: 'id',        // primary key in "users" table
+      model: 'users', // name of your "users" table
+      key: 'id', // primary key in "users" table
     },
     onUpdate: 'CASCADE',
     onDelete: 'CASCADE',
