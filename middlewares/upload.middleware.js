@@ -9,7 +9,7 @@ export const Image_upload = multer({
 }).single('image');
 
 export const Contact_image_upload = multer({
-  storage: Contact_Image_storage,
+  storage: Image_storage,
   limits: {
     fileSize: 2 * 1024 * 1024, // 2MB max file size
   },
