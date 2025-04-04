@@ -118,16 +118,13 @@ export const get_contact_details = async (req, res) => {
     return res.status(200).json({
       status_code: 200,
       message: 'Contact details retrieved successfully.',
-      data: [
-        {
-          email: contact_details.email,
-          image_url: contact_details.email_image_url,
-        },
-        {
-          mobile: contact_details.mobile,
-          image_url: contact_details.mobile_image_url,
-        },
-      ],
+      data: {
+        id: contact_details.id,
+        email: contact_details.email,
+        email_image_url: contact_details.email_image_url,
+        mobile: contact_details.mobile,
+        mobile_image_url: contact_details.mobile_image_url,
+      },
     });
   } catch (error) {
     return res.status(200).json({
