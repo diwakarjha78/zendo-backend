@@ -21,7 +21,7 @@ export const get_home = async (req, res) => {
         is_paid: is_subscribed,
         sections: [
           {
-            heading: 'Lastest Rendering',
+            heading: 'Latest Rendering',
             latest_rendering_list: latest_rendering,
           },
           {
@@ -52,191 +52,238 @@ export const get_home = async (req, res) => {
   }
 };
 
+// Latest Rendering: Create or update if exists (only one record exists)
 export const create_latest_rendering = async (req, res) => {
   try {
     const user = req.user;
     const { modern, product_alpha } = req.body;
-
     const is_subscribed = user ? (user.subscription ? 'true' : 'false') : 'false';
     const file = req.file;
     if (!file) {
-      return res.status(200).json({
-        status_code: 400,
-        message: 'No file uploaded',
-      });
+      return res.status(200).json({ status_code: 400, message: 'No file uploaded' });
     }
     const image_url = `${BASE_URL}/api/images/${file.filename}`;
 
-    // Create a new record in the latest_renderings table
-    const new_rendering = await Latest_rendering.create({
+    let record = await Latest_rendering.findOne();
+    if (record) {
+      // Update the existing record
+      await record.update({
+        is_paid: is_subscribed,
+        modern,
+        product_alpha,
+        render_image: image_url,
+      });
+      return res.status(200).json({
+        status_code: 200,
+        message: 'Latest rendering updated successfully',
+        data: record,
+      });
+    }
+    // Create a new record
+    const new_record = await Latest_rendering.create({
       is_paid: is_subscribed,
       modern,
       product_alpha,
       render_image: image_url,
     });
-
     return res.status(200).json({
       status_code: 200,
       message: 'Latest rendering created successfully',
-      data: new_rendering,
+      data: new_record,
     });
   } catch (error) {
-    console.error('Error creating latest rendering:', error);
+    console.error('Error processing latest rendering:', error);
     return res.status(200).json({
       status_code: 500,
-      message: 'An error occurred while fetching data.',
+      message: 'An error occurred while processing data.',
       error: error.message,
     });
   }
 };
 
+// Select Your Budget: Create or update if exists (only one record exists)
 export const create_select_your_budget = async (req, res) => {
   try {
     const user = req.user;
     const { budget_low, product_alpha } = req.body;
-
     const is_subscribed = user ? (user.subscription ? 'true' : 'false') : 'false';
     const file = req.file;
     if (!file) {
-      return res.status(200).json({
-        status_code: 400,
-        message: 'No file uploaded',
-      });
+      return res.status(200).json({ status_code: 400, message: 'No file uploaded' });
     }
     const image_url = `${BASE_URL}/api/images/${file.filename}`;
 
-    // Create a new record in the latest_renderings table
-    const new_rendering = await Select_your_budget.create({
+    let record = await Select_your_budget.findOne();
+    if (record) {
+      await record.update({
+        is_paid: is_subscribed,
+        budget_low,
+        product_alpha,
+        budget_image: image_url,
+      });
+      return res.status(200).json({
+        status_code: 200,
+        message: 'Select your budget updated successfully',
+        data: record,
+      });
+    }
+    const new_record = await Select_your_budget.create({
       is_paid: is_subscribed,
       budget_low,
       product_alpha,
       budget_image: image_url,
     });
-
     return res.status(200).json({
       status_code: 200,
       message: 'Select your budget created successfully',
-      data: new_rendering,
+      data: new_record,
     });
   } catch (error) {
-    console.error('Error creating Select your budget:', error);
+    console.error('Error processing select your budget:', error);
     return res.status(200).json({
       status_code: 500,
-      message: 'An error occurred while fetching data.',
+      message: 'An error occurred while processing data.',
       error: error.message,
     });
   }
 };
 
+// Select Your Room: Create or update if exists (only one record exists)
 export const create_select_your_room = async (req, res) => {
   try {
     const user = req.user;
     const { selectroom, product_alpha } = req.body;
-
     const is_subscribed = user ? (user.subscription ? 'true' : 'false') : 'false';
     const file = req.file;
     if (!file) {
-      return res.status(200).json({
-        status_code: 400,
-        message: 'No file uploaded',
-      });
+      return res.status(200).json({ status_code: 400, message: 'No file uploaded' });
     }
     const image_url = `${BASE_URL}/api/images/${file.filename}`;
 
-    // Create a new record in the latest_renderings table
-    const new_rendering = await Select_your_room.create({
+    let record = await Select_your_room.findOne();
+    if (record) {
+      await record.update({
+        is_paid: is_subscribed,
+        selectroom,
+        product_alpha,
+        room_image: image_url,
+      });
+      return res.status(200).json({
+        status_code: 200,
+        message: 'Select your room updated successfully',
+        data: record,
+      });
+    }
+    const new_record = await Select_your_room.create({
       is_paid: is_subscribed,
       selectroom,
       product_alpha,
       room_image: image_url,
     });
-
     return res.status(200).json({
       status_code: 200,
       message: 'Select your room created successfully',
-      data: new_rendering,
+      data: new_record,
     });
   } catch (error) {
-    console.error('Error creating Select your room:', error);
+    console.error('Error processing select your room:', error);
     return res.status(200).json({
       status_code: 500,
-      message: 'An error occurred while fetching data.',
+      message: 'An error occurred while processing data.',
       error: error.message,
     });
   }
 };
 
+// Select Your Style: Create or update if exists (only one record exists)
 export const create_select_your_style = async (req, res) => {
   try {
     const user = req.user;
     const { model, product_alpha } = req.body;
-
     const is_subscribed = user ? (user.subscription ? 'true' : 'false') : 'false';
     const file = req.file;
     if (!file) {
-      return res.status(200).json({
-        status_code: 400,
-        message: 'No file uploaded',
-      });
+      return res.status(200).json({ status_code: 400, message: 'No file uploaded' });
     }
     const image_url = `${BASE_URL}/api/images/${file.filename}`;
 
-    // Create a new record in the latest_renderings table
-    const new_rendering = await Select_your_style.create({
+    let record = await Select_your_style.findOne();
+    if (record) {
+      await record.update({
+        is_paid: is_subscribed,
+        model,
+        product_alpha,
+        product_image: image_url,
+      });
+      return res.status(200).json({
+        status_code: 200,
+        message: 'Select your style updated successfully',
+        data: record,
+      });
+    }
+    const new_record = await Select_your_style.create({
       is_paid: is_subscribed,
       model,
       product_alpha,
       product_image: image_url,
     });
-
     return res.status(200).json({
       status_code: 200,
       message: 'Select your style created successfully',
-      data: new_rendering,
+      data: new_record,
     });
   } catch (error) {
-    console.error('Error creating Select your style:', error);
+    console.error('Error processing select your style:', error);
     return res.status(200).json({
       status_code: 500,
-      message: 'An error occurred while fetching data.',
+      message: 'An error occurred while processing data.',
       error: error.message,
     });
   }
 };
 
+// Select Your Furniture: Create or update if exists (only one record exists)
 export const create_select_your_furniture = async (req, res) => {
   try {
     const user = req.user;
     const { package_name, product_alpha } = req.body;
-
     const is_subscribed = user ? (user.subscription ? 'true' : 'false') : 'false';
     const file = req.file;
     if (!file) {
-      return res.status(200).json({
-        status_code: 400,
-        message: 'No file uploaded',
-      });
+      return res.status(200).json({ status_code: 400, message: 'No file uploaded' });
     }
     const image_url = `${BASE_URL}/api/images/${file.filename}`;
 
-    // Create a new record in the latest_renderings table
-    const new_rendering = await Select_your_furniture.create({
+    let record = await Select_your_furniture.findOne();
+    if (record) {
+      await record.update({
+        is_paid: is_subscribed,
+        package_name,
+        product_alpha,
+        package_url: image_url,
+      });
+      return res.status(200).json({
+        status_code: 200,
+        message: 'Select your furniture updated successfully',
+        data: record,
+      });
+    }
+    const new_record = await Select_your_furniture.create({
       is_paid: is_subscribed,
       package_name,
       product_alpha,
       package_url: image_url,
     });
-
     return res.status(200).json({
       status_code: 200,
       message: 'Select your furniture created successfully',
-      data: new_rendering,
+      data: new_record,
     });
   } catch (error) {
-    console.error('Error creating Select your furniture:', error);
+    console.error('Error processing select your furniture:', error);
     return res.status(200).json({
       status_code: 500,
-      message: 'An error occurred while fetching data.',
+      message: 'An error occurred while processing data.',
       error: error.message,
     });
   }

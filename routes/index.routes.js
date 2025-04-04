@@ -62,6 +62,8 @@ import {
   get_user_budget_estimations,
 } from '../controllers/user_budget_estimation.controller.js';
 import { create_user_image_upload, get_all_users_image_uploads } from '../controllers/user_image_upload.controller.js';
+import { create_transaction, get_all_transactions } from '../controllers/transaction.controller.js';
+import { get_admin_notification_by_id, get_all_admin_notifications } from '../controllers/admin_notification.controller.js';
 
 const router = express.Router();
 
@@ -121,5 +123,9 @@ router.get('/userBudgetEstimations', get_user_budget_estimations);
 router.get('/getAllUserBudgetEstimations', get_all_user_budget_estimations);
 router.post('/createUserImageUpload', Image_upload, create_user_image_upload);
 router.get('/getAllUserImageUploads', get_all_users_image_uploads);
+router.post('/createTransaction', create_transaction);
+router.get('/getAllTansaction', get_all_transactions);
+router.get('/getAllAdminNotification', get_all_admin_notifications);
+router.get('/getAdminNotificationById', get_admin_notification_by_id);
 
 export default router;
