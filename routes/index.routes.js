@@ -127,7 +127,7 @@ router.get('/getAllUserBudgetEstimations', get_all_user_budget_estimations);
 router.post('/createUserImageUpload', Image_upload, create_user_image_upload);
 router.get('/getAllUserImageUploads', get_all_users_image_uploads);
 router.post('/createTransaction', create_transaction);
-router.get('/getAllTansaction', get_all_transactions);
+router.get('/getAllTransaction', get_all_transactions);
 router.get('/getAllAdminNotification', get_all_admin_notifications);
 router.get('/getAdminNotificationById', get_admin_notification_by_id);
 
