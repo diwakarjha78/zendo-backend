@@ -64,6 +64,7 @@ import {
 import { create_user_image_upload, get_all_users_image_uploads } from '../controllers/user_image_upload.controller.js';
 import { create_transaction, get_all_transactions } from '../controllers/transaction.controller.js';
 import {
+  delete_admin_notification,
   get_admin_notification_by_id,
   get_all_admin_notifications,
 } from '../controllers/admin_notification.controller.js';
@@ -130,5 +131,6 @@ router.post('/createTransaction', create_transaction);
 router.get('/getAllTransaction', get_all_transactions);
 router.get('/getAllAdminNotification', get_all_admin_notifications);
 router.get('/getAdminNotificationById', get_admin_notification_by_id);
+router.delete('/deleteAdminNotification', delete_admin_notification);
 
 export default router;

@@ -12,6 +12,7 @@ export const create_transaction = async (req, res) => {
       transaction_id,
       order_id,
     });
+    await User.update({ subscription: true }, { where: { id: user_id } });
     const user = await User.findOne({
       where: { id: user_id },
     });

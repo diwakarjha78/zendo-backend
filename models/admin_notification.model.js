@@ -19,6 +19,10 @@ Admin_notification.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    is_read: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
   },
   {
     sequelize,
