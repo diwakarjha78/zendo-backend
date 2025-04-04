@@ -170,3 +170,109 @@ export const contact_us_details = async (req, res) => {
     });
   }
 };
+
+export const get_all_contact_us = async (req, res) => {
+  try {
+    const contacts = await Contact_us.findAll({
+      include: [
+        {
+          model: User,
+          attributes: ['id', 'username', 'email'], // assuming User has a "username" field
+        },
+      ],
+      order: [['createdAt', 'DESC']],
+    });
+    if (!contacts || contacts.length === 0) {
+      return res.status(200).json({
+        status_code: 404,
+        message: 'No contacts found',
+      });
+    }
+    return res.status(200).json({
+      status_code: 200,
+      message: 'Contacts retrieved successfully',
+      data: contacts,
+    });
+  } catch (error) {
+    return res.status(200).json({
+      status_code: 500,
+      message: 'Internal Server Error',
+      error: error.message,
+    });
+  }
+};
+
+// Update a contact by its id provided in req.body
+export const update_contact_us = async (req, res) => {
+  try {
+    const { id, full_name, email, mobile, message } = req.body;
+
+    if (!id) {
+      return res.status(400).json({
+        status_code: 400,
+        message: 'Contact id is required for update',
+      });
+    }
+
+    const contact = await Contact_us.findByPk(id);
+    if (!contact) {
+      return res.status(200).json({
+        status_code: 404,
+        message: 'Contact not found',
+      });
+    }
+
+    await contact.update({
+      full_name: full_name || contact.full_name,
+      email: email || contact.email,
+      mobile: mobile || contact.mobile,
+      message: typeof message === 'string' ? message.trim() : contact.message,
+    });
+
+    return res.status(200).json({
+      status_code: 200,
+      message: 'Contact updated successfully',
+      data: contact,
+    });
+  } catch (error) {
+    return res.status(200).json({
+      status_code: 500,
+      message: 'Internal Server Error',
+      error: error.message,
+    });
+  }
+};
+
+// Delete a contact by its id provided in req.body
+export const delete_contact_us = async (req, res) => {
+  try {
+    const { id } = req.body;
+
+    if (!id) {
+      return res.status(200).json({
+        status_code: 400,
+        message: 'Contact id is required for deletion',
+      });
+    }
+
+    const contact = await Contact_us.findByPk(id);
+    if (!contact) {
+      return res.status(200).json({
+        status_code: 404,
+        message: 'Contact not found',
+      });
+    }
+
+    await contact.destroy();
+    return res.status(200).json({
+      status_code: 200,
+      message: 'Contact deleted successfully',
+    });
+  } catch (error) {
+    return res.status(200).json({
+      status_code: 500,
+      message: 'Internal Server Error',
+      error: error.message,
+    });
+  }
+};

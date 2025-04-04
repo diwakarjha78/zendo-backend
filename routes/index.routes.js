@@ -8,6 +8,9 @@ import {
   create_contact_details,
   update_contact_details,
   delete_contact_details,
+  get_all_contact_us,
+  update_contact_us,
+  delete_contact_us,
 } from '../controllers/contact.controller.js';
 import { verify_token } from '../middlewares/token.middleware.js';
 import { set_device_count, get_device_count } from '../controllers/device_count.controller.js';
@@ -79,6 +82,9 @@ router.post('/createContactDetails', Contact_image_upload, create_contact_detail
 router.put('/updateContactDetails', Contact_image_upload, update_contact_details);
 router.delete('/deleteContactDetails', delete_contact_details);
 router.post('/userContactDetails', verify_token, contact_us_details);
+router.get('/getAllContactUs', get_all_contact_us);
+router.put('/updateContactUs', update_contact_us);
+router.delete('/deleteContactUs', delete_contact_us);
 router.post('/setDeviceCount', set_device_count);
 router.get('/getCount/:id', get_device_count);
 router.get('/getHelpSupport', get_help_support_data);
