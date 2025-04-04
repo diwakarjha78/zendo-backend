@@ -9,6 +9,7 @@ import Payment from './models/payment.model.js';
 import User_budget_estimation from './models/user_budget_estimation.model.js';
 import Budget_estimation from './models/budget_estimation.model.js';
 import User_image_upload from './models/user_image_upload.model.js';
+import Transaction from './models/transaction.model.js';
 
 const define_association = () => {
   // Contact_us
@@ -42,6 +43,10 @@ const define_association = () => {
   // User Image Uploads
   User.hasMany(User_image_upload, { foreignKey: 'user_id', onDelete: 'CASCADE' });
   User_image_upload.belongsTo(User, { foreignKey: 'user_id' });
+
+  // Transactions
+  User.hasMany(Transaction, { foreignKey: 'user_id', onDelete: 'CASCADE' });
+  Transaction.belongsTo(User, { foreignKey: 'user_id' });
 };
 
 export default define_association;
