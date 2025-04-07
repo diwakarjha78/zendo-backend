@@ -1,4 +1,3 @@
-import User from '../models/user.model.js';
 import { Model, DataTypes } from 'sequelize';
 import { sequelize } from '../configs/db.config.js';
 

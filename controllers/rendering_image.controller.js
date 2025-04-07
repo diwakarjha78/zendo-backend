@@ -69,13 +69,14 @@ export const get_all_users_rendering_image = async (req, res) => {
       include: [
         {
           model: Rendering_image,
-          attributes: ['image_url'],
+          attributes: ['ai_image'],
         },
       ],
     });
+
     const transformed_users = users.map((user) => {
       const rendering_image_url =
-        user.Rendering_images && user.Rendering_images.length > 0 ? user.Rendering_images[0].image_url : '';
+        user.Rendering_images && user.Rendering_images.length > 0 ? user.Rendering_images[0].ai_image : '';
 
       return {
         id: user.id,
