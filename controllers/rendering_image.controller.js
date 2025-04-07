@@ -63,6 +63,46 @@ export const get_rendering_image = async (req, res) => {
   }
 };
 
+export const get_all_users_rendering_image = async (req, res) => {
+  try {
+    const users = await User.findAll({
+      include: [
+        {
+          model: Rendering_image,
+          attributes: ['image_url'],
+        },
+      ],
+    });
+    const transformed_users = users.map((user) => {
+      const rendering_image_url =
+        user.Rendering_images && user.Rendering_images.length > 0 ? user.Rendering_images[0].image_url : '';
+
+      return {
+        id: user.id,
+        username: user.username,
+        email: user.email,
+        mobile: user.mobile,
+        is_active: user.is_active,
+        createdAt: user.createdAt,
+        updatedAt: user.updatedAt,
+        rendering_image_url,
+      };
+    });
+
+    return res.status(200).json({
+      status_code: 200,
+      message: 'User rendering images retrieved successfully',
+      data: transformed_users,
+    });
+  } catch (error) {
+    return res.status(200).json({
+      status_code: 500,
+      message: 'Error retrieving user rendering images',
+      error: error.message,
+    });
+  }
+};
+
 export const delete_rendering_image = async (req, res) => {
   try {
     const rendering_image_ids = req.body;

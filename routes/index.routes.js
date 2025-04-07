@@ -39,6 +39,7 @@ import {
   upload_rendering_image,
   get_rendering_image,
   delete_rendering_image,
+  get_all_users_rendering_image,
 } from '../controllers/rendering_image.controller.js';
 import {
   upload_swipe_preference_image,
@@ -108,6 +109,7 @@ router.post('/userUpdateProfile', verify_token, Image_upload, update_user);
 router.get('/home', verify_token, get_home);
 router.post('/uploadRenderingImage', verify_token, upload_rendering_image);
 router.get('/getRenderingImage', verify_token, get_rendering_image);
+router.get('/getAllUsersRenderingImage', verify_token, get_all_users_rendering_image);
 router.post('/deleteRenderingImage', verify_token, delete_rendering_image);
 router.post('/uploadSwipePreferenceImage', Image_upload, upload_swipe_preference_image);
 router.get('/getSwipePreferenceImage', get_swipe_preference_images);
