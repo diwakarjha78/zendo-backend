@@ -78,9 +78,7 @@ export const get_all_users_rendering_image = async (req, res) => {
     // Transform the data to return an array of ai_image values per user.
     const transformed_users = users.map((user) => {
       // Map over the associated Rendering_image array to extract all ai_image values.
-      const rendering_images = user.Rendering_images
-        ? user.Rendering_images.map((img) => img.ai_image)
-        : [];
+      const rendering_images = user.Rendering_images ? user.Rendering_images.map((img) => img.ai_image) : [];
 
       return {
         id: user.id,
@@ -108,6 +106,63 @@ export const get_all_users_rendering_image = async (req, res) => {
   }
 };
 
+export const get_all_user_rendering_data = async (req, res) => {
+  try {
+    const users = await User.findAll({
+      include: [
+        {
+          model: Rendering_image,
+          attributes: ['id', 'ai_image', 'furniture_data', 'createdAt'],
+        },
+      ],
+    });
+
+    const transformedData = users.map((user) => {
+      const rendering_data = user.Rendering_images.map((img) => {
+        let parsedFurniture = null;
+        try {
+          // Parse furniture_data JSON safely
+          const raw = typeof img.furniture_data === 'string' ? JSON.parse(img.furniture_data) : img.furniture_data;
+
+          parsedFurniture = raw?.result || null;
+        } catch (err) {
+          console.error('Furniture JSON parsing error:', err.message);
+        }
+
+        return {
+          rendering_id: img.id,
+          ai_image: img.ai_image,
+          createdAt: img.createdAt,
+          furniture: parsedFurniture,
+        };
+      });
+
+      return {
+        id: user.id,
+        username: user.username,
+        email: user.email,
+        mobile: user.mobile,
+        is_active: user.is_active,
+        createdAt: user.createdAt,
+        updatedAt: user.updatedAt,
+        renderings: rendering_data,
+      };
+    });
+
+    return res.status(200).json({
+      status_code: 200,
+      message: 'All users rendering data retrieved successfully',
+      data: transformedData,
+    });
+  } catch (error) {
+    console.error('Error in get_all_user_rendering_data:', error);
+    return res.status(200).json({
+      status_code: 500,
+      message: 'Internal Server Error',
+      error: error.message,
+    });
+  }
+};
 
 export const delete_rendering_image = async (req, res) => {
   try {
