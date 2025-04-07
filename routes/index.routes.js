@@ -26,7 +26,7 @@ import { add_payment } from '../controllers/payment.controller.js';
 import { get_privacy_policy } from '../controllers/privacy_policy.controller.js';
 import { create_user, generate_otp, verify_email } from '../controllers/signup.controller.js';
 import { get_terms_policies } from '../controllers/terms_policies.controller.js';
-import { get_profile, update_user, soft_delete_user, get_all_user } from '../controllers/user.controller.js';
+import { get_profile, update_user, soft_delete_user, get_all_user, restore_deleted_user } from '../controllers/user.controller.js';
 import {
   get_home,
   create_latest_rendering,
@@ -112,6 +112,7 @@ router.post('/deleteRenderingImage', verify_token, delete_rendering_image);
 router.post('/uploadSwipePreferenceImage', Image_upload, upload_swipe_preference_image);
 router.get('/getSwipePreferenceImage', get_swipe_preference_images);
 router.get('/deleteUser', verify_token, soft_delete_user);
+router.get('/restoreDeletedUser', verify_token, restore_deleted_user);
 router.post('/uploadLatestRendering', Image_upload, create_latest_rendering);
 router.post('/uploadSelectYourBudget', Image_upload, create_select_your_budget);
 router.post('/uploadSelectYourRoom', Image_upload, create_select_your_room);

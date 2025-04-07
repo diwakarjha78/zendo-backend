@@ -162,6 +162,41 @@ export const soft_delete_user = async (req, res) => {
   }
 };
 
+export const restore_deleted_user = async (req, res) => {
+  try {
+    const target_user_id = req.query.userId ? req.query.userId : req.user.id;
+    const where_condition = req.query.userId ? { id: target_user_id } : { id: target_user_id, email: req.user.email };
+
+    const user_data = await User.findOne({
+      where: where_condition,
+      attributes: { exclude: ['password'] },
+    });
+
+    if (!user_data) {
+      return res.status(200).json({
+        status_code: 404,
+        message: 'User not found',
+      });
+    }
+
+    // Restore by setting is_active to true
+    await user_data.update({ is_active: true });
+
+    return res.status(200).json({
+      status_code: 200,
+      message: `${user_data.username} has been restored`,
+      data: user_data,
+    });
+  } catch (error) {
+    console.error('Error restoring user: ', error);
+    return res.status(200).json({
+      status_code: 500,
+      message: 'Internal server error',
+      error: error.message,
+    });
+  }
+};
+
 export const get_all_user = async (req, res) => {
   try {
     const all_users = await User.findAll({
