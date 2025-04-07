@@ -35,9 +35,4 @@ Rendering_image.init(
   }
 );
 
-Rendering_image.belongsTo(User, {
-  foreignKey: 'user_id',
-  as: 'user',
-});
-
 export default Rendering_image;
