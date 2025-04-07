@@ -101,6 +101,31 @@ export const create_latest_rendering = async (req, res) => {
   }
 };
 
+export const delete_latest_rendering = async (req, res) => {
+  try {
+    const { id } = req.body;
+    const record = await Latest_rendering.findOne({ where: { id } });
+    if (!record) {
+      return res.status(200).json({
+        status_code: 404,
+        message: 'Latest rendering not found',
+      });
+    }
+    await record.destroy();
+    return res.status(200).json({
+      status_code: 200,
+      message: 'Latest rendering deleted successfully',
+      data: record,
+    });
+  } catch (error) {
+    return res.status(200).json({
+      status_code: 500,
+      message: 'An error occurred while deleting data.',
+      error: error.message,
+    });
+  }
+};
+
 // Select Your Budget: Create or update if exists (only one record exists)
 export const create_select_your_budget = async (req, res) => {
   try {
@@ -143,6 +168,31 @@ export const create_select_your_budget = async (req, res) => {
     return res.status(200).json({
       status_code: 500,
       message: 'An error occurred while processing data.',
+      error: error.message,
+    });
+  }
+};
+
+export const delete_select_your_budget = async (req, res) => {
+  try {
+    const { id } = req.body;
+    const record = await Select_your_budget.findOne({ where: { id } });
+    if (!record) {
+      return res.status(200).json({
+        status_code: 404,
+        message: 'Select your budget not found',
+      });
+    }
+    await record.destroy();
+    return res.status(200).json({
+      status_code: 200,
+      message: 'Select your budget deleted successfully',
+      data: record,
+    });
+  } catch (error) {
+    return res.status(200).json({
+      status_code: 500,
+      message: 'An error occurred while deleting data.',
       error: error.message,
     });
   }
@@ -195,6 +245,31 @@ export const create_select_your_room = async (req, res) => {
   }
 };
 
+export const delete_select_your_room = async (req, res) => {
+  try {
+    const { id } = req.body;
+    const record = await Select_your_room.findOne({ where: { id } });
+    if (!record) {
+      return res.status(200).json({
+        status_code: 404,
+        message: 'Select your room not found',
+      });
+    }
+    await record.destroy();
+    return res.status(200).json({
+      status_code: 200,
+      message: 'Select your room deleted successfully',
+      data: record,
+    });
+  } catch (error) {
+    return res.status(200).json({
+      status_code: 500,
+      message: 'An error occurred while deleting data.',
+      error: error.message,
+    });
+  }
+};
+
 // Select Your Style: Create or update if exists (only one record exists)
 export const create_select_your_style = async (req, res) => {
   try {
@@ -242,6 +317,31 @@ export const create_select_your_style = async (req, res) => {
   }
 };
 
+export const delete_select_your_style = async (req, res) => {
+  try {
+    const { id } = req.body;
+    const record = await Select_your_style.findOne({ where: { id } });
+    if (!record) {
+      return res.status(200).json({
+        status_code: 404,
+        message: 'Select your style not found',
+      });
+    }
+    await record.destroy();
+    return res.status(200).json({
+      status_code: 200,
+      message: 'Select your style deleted successfully',
+      data: record,
+    });
+  } catch (error) {
+    return res.status(200).json({
+      status_code: 500,
+      message: 'An error occurred while deleting data.',
+      error: error.message,
+    });
+  }
+};
+
 // Select Your Furniture: Create or update if exists (only one record exists)
 export const create_select_your_furniture = async (req, res) => {
   try {
@@ -284,6 +384,31 @@ export const create_select_your_furniture = async (req, res) => {
     return res.status(200).json({
       status_code: 500,
       message: 'An error occurred while processing data.',
+      error: error.message,
+    });
+  }
+};
+
+export const delete_select_your_furniture = async (req, res) => {
+  try {
+    const { id } = req.body;
+    const record = await Select_your_furniture.findOne({ where: { id } });
+    if (!record) {
+      return res.status(200).json({
+        status_code: 404,
+        message: 'Select your furniture not found',
+      });
+    }
+    await record.destroy();
+    return res.status(200).json({
+      status_code: 200,
+      message: 'Select your furniture deleted successfully',
+      data: record,
+    });
+  } catch (error) {
+    return res.status(200).json({
+      status_code: 500,
+      message: 'An error occurred while deleting data.',
       error: error.message,
     });
   }
