@@ -65,6 +65,7 @@ export const get_rendering_image = async (req, res) => {
 
 export const get_all_users_rendering_image = async (req, res) => {
   try {
+    // Retrieve all users with their associated rendering images.
     const users = await User.findAll({
       include: [
         {
@@ -74,9 +75,12 @@ export const get_all_users_rendering_image = async (req, res) => {
       ],
     });
 
+    // Transform the data to return an array of ai_image values per user.
     const transformed_users = users.map((user) => {
-      const rendering_image_url =
-        user.Rendering_images && user.Rendering_images.length > 0 ? user.Rendering_images[0].ai_image : '';
+      // Map over the associated Rendering_image array to extract all ai_image values.
+      const rendering_images = user.Rendering_images
+        ? user.Rendering_images.map((img) => img.ai_image)
+        : [];
 
       return {
         id: user.id,
@@ -86,7 +90,7 @@ export const get_all_users_rendering_image = async (req, res) => {
         is_active: user.is_active,
         createdAt: user.createdAt,
         updatedAt: user.updatedAt,
-        rendering_image_url,
+        rendering_images,
       };
     });
 
@@ -103,6 +107,7 @@ export const get_all_users_rendering_image = async (req, res) => {
     });
   }
 };
+
 
 export const delete_rendering_image = async (req, res) => {
   try {
