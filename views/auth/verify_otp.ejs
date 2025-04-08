@@ -1,0 +1,33 @@
+<% title="Verify OTP - Zendo Admin" %>
+
+    <div class="flex min-h-screen w-screen flex-col items-center justify-center sm:bg-gray-50 p-4">
+        <div class="w-full max-w-lg rounded-none shadow-none border-none sm:rounded-lg sm:shadow-lg bg-white">
+            <div class="text-center p-6">
+                <img src="/images/logo.png" alt="zendo-logo" class="mx-auto mb-2 h-16 w-16 rounded-full" />
+                <h2 class="text-2xl font-semibold">Verify OTP</h2>
+                <p class="text-gray-600 mt-1 ">Enter the OTP sent to your email <% if (email) { %>
+                        <div class="text-sm text-red-500">
+                            <%= email %>
+                        </div>
+                        <% } %>
+                </p>
+            </div>
+
+            <!-- Email Form -->
+            <div class="p-6 pt-0">
+                <form id="verifyOtpForm" action="/auth/verify-otp" method="POST" class="space-y-4">
+                    <input type="text" name="email" id="email" value="<%= email %>" hidden />
+                    <input type="text" name="otp" id="verify-otp" placeholder="Enter OTP" required
+                        class="w-full px-3 py-2 mt-1 rounded border border-gray-300 shadow-none focus:outline-none" />
+                    <button type="submit" id="submitBtn"
+                        class="cursor-pointer w-full py-2 bg-black text-white rounded hover:bg-gray-900">
+                        <span id="btnText">Verify OTP</span>
+                        <span id="loadingText" class="hidden">Verifying...</span>
+                    </button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="/js/verify-otp.js"></script>

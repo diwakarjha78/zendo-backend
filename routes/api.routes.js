@@ -26,7 +26,13 @@ import { add_payment } from '../controllers/api/v1/payment.controller.js';
 import { get_privacy_policy } from '../controllers/api/v1/privacy_policy.controller.js';
 import { create_user, generate_otp, verify_email } from '../controllers/api/v1/signup.controller.js';
 import { get_terms_policies } from '../controllers/api/v1/terms_policies.controller.js';
-import { get_profile, update_user, soft_delete_user, get_all_user, restore_deleted_user } from '../controllers/api/v1/user.controller.js';
+import {
+  get_profile,
+  update_user,
+  soft_delete_user,
+  get_all_user,
+  restore_deleted_user,
+} from '../controllers/api/v1/user.controller.js';
 import {
   get_home,
   create_latest_rendering,
@@ -66,7 +72,10 @@ import {
   get_all_user_budget_estimations,
   get_user_budget_estimations,
 } from '../controllers/api/v1/user_budget_estimation.controller.js';
-import { create_user_image_upload, get_all_users_image_uploads } from '../controllers/api/v1/user_image_upload.controller.js';
+import {
+  create_user_image_upload,
+  get_all_users_image_uploads,
+} from '../controllers/api/v1/user_image_upload.controller.js';
 import { create_transaction, get_all_transactions } from '../controllers/api/v1/transaction.controller.js';
 import {
   get_all_admin_notifications,

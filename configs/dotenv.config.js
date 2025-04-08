@@ -23,6 +23,9 @@ export const SALT_ROUNDS = process.env.SALT_ROUNDS || 10;
 export const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY;
 export const JWT_REFRESH_TOKEN_SECRET_KEY = process.env.JWT_REFRESH_TOKEN_SECRET_KEY;
 
+// Session Secret
+export const SESSION_SECRET = process.env.SESSION_SECRET;
+
 // Nodemailer
 export const MAIL_PORT = process.env.MAIL_PORT || 587;
 export const MAIL_HOST = process.env.MAIL_HOST;
