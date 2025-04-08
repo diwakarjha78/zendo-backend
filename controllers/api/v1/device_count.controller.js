@@ -1,4 +1,4 @@
-import Device_count from '../models/device_count.model.js';
+import Device_count from '../../../models/device_count.model.js';
 
 export const set_device_count = async (req, res) => {
   try {

@@ -1,4 +1,4 @@
-import Help_support from '../models/help_support.model.js';
+import Help_support from '../../../models/help_support.model.js';
 
 export const get_help_support_data = async (req, res) => {
   try {

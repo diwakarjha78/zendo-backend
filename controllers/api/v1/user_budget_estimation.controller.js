@@ -1,6 +1,6 @@
-import User from '../models/user.model.js';
-import Budget_estimation from '../models/budget_estimation.model.js';
-import User_budget_estimation from '../models/user_budget_estimation.model.js';
+import User from '../../../models/user.model.js';
+import Budget_estimation from '../../../models/budget_estimation.model.js';
+import User_budget_estimation from '../../../models/user_budget_estimation.model.js';
 
 export const create_user_budget_estimation = async (req, res) => {
   try {

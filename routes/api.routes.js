@@ -1,7 +1,7 @@
 import express from 'express';
 import { Contact_image_upload, Image_upload } from '../middlewares/upload.middleware.js';
-import { get_about_us } from '../controllers/about_us.controller.js';
-import { main_budget_estimation, get_budget_estimation } from '../controllers/budget_estimation.controller.js';
+import { get_about_us } from '../controllers/api/v1/about_us.controller.js';
+import { main_budget_estimation, get_budget_estimation } from '../controllers/api/v1/budget_estimation.controller.js';
 import {
   get_contact_details,
   contact_us_details,
@@ -11,22 +11,22 @@ import {
   get_all_contact_us,
   update_contact_us,
   delete_contact_us,
-} from '../controllers/contact.controller.js';
+} from '../controllers/api/v1/contact.controller.js';
 import { verify_token } from '../middlewares/token.middleware.js';
-import { set_device_count, get_device_count } from '../controllers/device_count.controller.js';
-import { get_help_support_data } from '../controllers/help_support.controller.js';
-import { login, logout, refresh_token } from '../controllers/login.controller.js';
-import { get_notifications, delete_notifications } from '../controllers/notification.controller.js';
+import { set_device_count, get_device_count } from '../controllers/api/v1/device_count.controller.js';
+import { get_help_support_data } from '../controllers/api/v1/help_support.controller.js';
+import { login, logout, refresh_token } from '../controllers/api/v1/login.controller.js';
+import { get_notifications, delete_notifications } from '../controllers/api/v1/notification.controller.js';
 import {
   generate_forgot_password_otp,
   create_password,
   verify_forgot_password_otp,
-} from '../controllers/password.controller.js';
-import { add_payment } from '../controllers/payment.controller.js';
-import { get_privacy_policy } from '../controllers/privacy_policy.controller.js';
-import { create_user, generate_otp, verify_email } from '../controllers/signup.controller.js';
-import { get_terms_policies } from '../controllers/terms_policies.controller.js';
-import { get_profile, update_user, soft_delete_user, get_all_user, restore_deleted_user } from '../controllers/user.controller.js';
+} from '../controllers/api/v1/password.controller.js';
+import { add_payment } from '../controllers/api/v1/payment.controller.js';
+import { get_privacy_policy } from '../controllers/api/v1/privacy_policy.controller.js';
+import { create_user, generate_otp, verify_email } from '../controllers/api/v1/signup.controller.js';
+import { get_terms_policies } from '../controllers/api/v1/terms_policies.controller.js';
+import { get_profile, update_user, soft_delete_user, get_all_user, restore_deleted_user } from '../controllers/api/v1/user.controller.js';
 import {
   get_home,
   create_latest_rendering,
@@ -34,25 +34,25 @@ import {
   create_select_your_room,
   create_select_your_style,
   create_select_your_furniture,
-} from '../controllers/home.controller.js';
+} from '../controllers/api/v1/home.controller.js';
 import {
   upload_rendering_image,
   get_rendering_image,
   delete_rendering_image,
   get_all_users_rendering_image,
   get_all_user_rendering_data,
-} from '../controllers/rendering_image.controller.js';
+} from '../controllers/api/v1/rendering_image.controller.js';
 import {
   upload_swipe_preference_image,
   get_swipe_preference_images,
-} from '../controllers/swipe_preference_image.controller.js';
+} from '../controllers/api/v1/swipe_preference_image.controller.js';
 import {
   get_subscription_list,
   get_subscription_by_id,
   post_subscription,
   update_subscription,
   delete_subscription,
-} from '../controllers/subscription.controller.js';
+} from '../controllers/api/v1/subscription.controller.js';
 import {
   create_user_swipe_preference,
   delete_user_swipe_preference,
@@ -60,19 +60,19 @@ import {
   get_all_users_with_preferences,
   get_user_swipe_preference_by_id,
   update_user_swipe_preference,
-} from '../controllers/user_swipe_preference.controller.js';
+} from '../controllers/api/v1/user_swipe_preference.controller.js';
 import {
   create_user_budget_estimation,
   get_all_user_budget_estimations,
   get_user_budget_estimations,
-} from '../controllers/user_budget_estimation.controller.js';
-import { create_user_image_upload, get_all_users_image_uploads } from '../controllers/user_image_upload.controller.js';
-import { create_transaction, get_all_transactions } from '../controllers/transaction.controller.js';
+} from '../controllers/api/v1/user_budget_estimation.controller.js';
+import { create_user_image_upload, get_all_users_image_uploads } from '../controllers/api/v1/user_image_upload.controller.js';
+import { create_transaction, get_all_transactions } from '../controllers/api/v1/transaction.controller.js';
 import {
   get_all_admin_notifications,
   mark_notification_as_read,
   delete_admin_notification,
-} from '../controllers/admin_notification.controller.js';
+} from '../controllers/api/v1/admin_notification.controller.js';
 
 const router = express.Router();
 

@@ -1,5 +1,5 @@
-import User from '../models/user.model.js';
-import Rendering_image from '../models/rendering_image.model.js';
+import User from '../../../models/user.model.js';
+import Rendering_image from '../../../models/rendering_image.model.js';
 
 export const upload_rendering_image = async (req, res) => {
   try {

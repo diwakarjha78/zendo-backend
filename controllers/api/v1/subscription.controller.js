@@ -1,6 +1,6 @@
-import { BASE_URL } from '../configs/dotenv.config.js';
-import Subscription from '../models/subscription.model.js';
-import Subscription_data from '../models/subscription_data.model.js';
+import { BASE_URL } from '../../../configs/dotenv.config.js';
+import Subscription from '../../../models/subscription.model.js';
+import Subscription_data from '../../../models/subscription_data.model.js';
 
 // Define relationships
 

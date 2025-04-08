@@ -1,4 +1,4 @@
-import Terms_policies from '../models/terms_policies.model.js';
+import Terms_policies from '../../../models/terms_policies.model.js';
 
 export const get_terms_policies = async (req, res) => {
   try {

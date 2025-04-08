@@ -1,6 +1,6 @@
-import User_image_upload from '../models/user_image_upload.model.js';
-import { BASE_URL } from '../configs/dotenv.config.js';
-import User from '../models/user.model.js';
+import User_image_upload from '../../../models/user_image_upload.model.js';
+import { BASE_URL } from '../../../configs/dotenv.config.js';
+import User from '../../../models/user.model.js';
 
 export const create_user_image_upload = async (req, res) => {
   try {

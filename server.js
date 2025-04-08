@@ -2,18 +2,24 @@ import cors from 'cors';
 import helmet from 'helmet';
 import express from 'express';
 import bodyParser from 'body-parser';
-import router from './routes/index.routes.js';
+import router from './routes/api.routes.js';
 import rateLimit from 'express-rate-limit';
 import { PORT } from './configs/dotenv.config.js';
 import { connect_db } from './configs/db.config.js';
 import { Image_upload_dir } from './helpers/path_dir.helper.js';
 import define_association from './associations.js';
+import admin_router from './routes/admin.routes.js';
+import expressLayouts from 'express-ejs-layouts';
 
 const app = express();
 
 // Middleware setup
 app.use(cors());
 app.use(helmet());
+app.set('view engine', 'ejs');
+app.use(expressLayouts);
+app.set('layout', 'root');
+app.use(express.static('public'));
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
@@ -28,15 +34,16 @@ const limiter = rateLimit({
 app.use(limiter);
 
 // API Routes
-app.use('/api', router);
+app.use('/api/v1', router);
+app.use('/', admin_router);
 
 // Static Images
 app.use('/api/images', express.static(Image_upload_dir));
 
 // Root
-app.get('/', (req, res) => {
-  res.status(200).json({ message: 'Welcome to the API!' });
-});
+// app.get('/', (req, res) => {
+//   res.status(200).json({ message: 'Welcome to the API!' });
+// });
 
 // start server
 const start_server = async () => {

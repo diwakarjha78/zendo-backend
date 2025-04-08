@@ -1,7 +1,7 @@
-import User from '../models/user.model.js';
-import Contact_us from '../models/contact_us.model.js';
-import Contact_details from '../models/contact_details.model.js';
-import { BASE_URL } from '../configs/dotenv.config.js';
+import User from '../../../models/user.model.js';
+import Contact_us from '../../../models/contact_us.model.js';
+import Contact_details from '../../../models/contact_details.model.js';
+import { BASE_URL } from '../../../configs/dotenv.config.js';
 
 export const create_contact_details = async (req, res) => {
   try {

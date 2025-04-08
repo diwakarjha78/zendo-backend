@@ -1,4 +1,4 @@
-import About_us from '../models/about_us.model.js';
+import About_us from '../../../models/about_us.model.js';
 
 export const get_about_us = async (req, res) => {
   try {

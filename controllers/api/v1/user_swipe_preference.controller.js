@@ -1,6 +1,6 @@
-import User from '../models/user.model.js';
-import User_swipe_preference from '../models/user_swipe_preference.model.js';
-import Swipe_preference_image from '../models/swipe_preference_image.model.js';
+import User from '../../../models/user.model.js';
+import User_swipe_preference from '../../../models/user_swipe_preference.model.js';
+import Swipe_preference_image from '../../../models/swipe_preference_image.model.js';
 
 // Create a new user swipe preference
 export const create_user_swipe_preference = async (req, res) => {

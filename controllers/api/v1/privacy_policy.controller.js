@@ -1,4 +1,4 @@
-import Privacy_policy from '../models/privacy_policy.model.js';
+import Privacy_policy from '../../../models/privacy_policy.model.js';
 
 export const get_privacy_policy = async (req, res) => {
   try {

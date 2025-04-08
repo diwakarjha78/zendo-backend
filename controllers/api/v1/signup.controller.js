@@ -1,7 +1,7 @@
-import { Mailer } from '../configs/mailer.config.js';
-import { hashed_password, generate_token, generate_refresh_token } from '../helpers/auth.helper.js';
-import Verification_otp from '../models/verification_otp.model.js';
-import User from '../models/user.model.js';
+import { Mailer } from '../../../configs/mailer.config.js';
+import { hashed_password, generate_token, generate_refresh_token } from '../../../helpers/auth.helper.js';
+import Verification_otp from '../../../models/verification_otp.model.js';
+import User from '../../../models/user.model.js';
 
 export const create_user = async (req, res) => {
   try {

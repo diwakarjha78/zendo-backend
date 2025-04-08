@@ -1,4 +1,4 @@
-import Admin_notification from '../models/admin_notification.model.js';
+import Admin_notification from '../../../models/admin_notification.model.js';
 
 // Get all notifications (sorted by newest first)
 export const get_all_admin_notifications = async (req, res) => {

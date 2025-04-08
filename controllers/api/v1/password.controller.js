@@ -1,7 +1,7 @@
-import User from '../models/user.model.js';
-import { hashed_password } from '../helpers/auth.helper.js';
-import Verification_otp from '../models/verification_otp.model.js';
-import { Mailer } from '../configs/mailer.config.js';
+import User from '../../../models/user.model.js';
+import { hashed_password } from '../../../helpers/auth.helper.js';
+import Verification_otp from '../../../models/verification_otp.model.js';
+import { Mailer } from '../../../configs/mailer.config.js';
 
 export const create_password = async (req, res) => {
   const { email, password } = req.body;

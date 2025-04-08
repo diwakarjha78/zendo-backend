@@ -1,6 +1,6 @@
-import Transaction from '../models/transaction.model.js';
-import Admin_notification from '../models/admin_notification.model.js';
-import User from '../models/user.model.js';
+import Transaction from '../../../models/transaction.model.js';
+import Admin_notification from '../../../models/admin_notification.model.js';
+import User from '../../../models/user.model.js';
 
 export const create_transaction = async (req, res) => {
   try {

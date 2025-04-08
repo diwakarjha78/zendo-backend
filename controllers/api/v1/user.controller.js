@@ -1,5 +1,5 @@
-import User from '../models/user.model.js';
-import { BASE_URL } from '../configs/dotenv.config.js';
+import User from '../../../models/user.model.js';
+import { BASE_URL } from '../../../configs/dotenv.config.js';
 
 export const update_user = async (req, res) => {
   const user = req.user;

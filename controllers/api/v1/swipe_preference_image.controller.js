@@ -1,5 +1,5 @@
-import Swipe_preference_image from '../models/swipe_preference_image.model.js';
-import { BASE_URL } from '../configs/dotenv.config.js';
+import Swipe_preference_image from '../../../models/swipe_preference_image.model.js';
+import { BASE_URL } from '../../../configs/dotenv.config.js';
 
 export const upload_swipe_preference_image = async (req, res) => {
   try {
