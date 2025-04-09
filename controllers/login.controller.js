@@ -11,10 +11,23 @@ export const login_page = async (req, res) => {
 
 export const login_post = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { email, password, rememberMe } = req.body;
     const response = await axios.post(`${API_BASE_URL}/login`, { email, password });
 
     if (response.data.status_code === 200) {
+      const userData = {
+        id: response.data.data.id,
+        email: response.data.data.email,
+        zendo_at: response.data.data.token,
+        zendo_rt: response.data.data.refresh_token,
+      };
+
+      res.cookie('zendo_user', JSON.stringify(userData), {
+        httpOnly: false,
+        secure: false,
+        sameSite: 'lax',
+        maxAge: rememberMe ? 30 * 24 * 60 * 60 * 1000 : undefined,
+      });
       return res.redirect('/');
     } else {
       return res.render('auth/login', {

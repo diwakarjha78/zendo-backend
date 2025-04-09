@@ -10,26 +10,27 @@ import {
   verify_otp,
   verify_otp_post,
 } from '../controllers/login.controller.js';
+import { redirect_if_authenticated, is_authenticated } from '../middlewares/auth.middleware.js';
 
 const admin_router = express.Router();
 
 // Dashboard route
-admin_router.get('/', dashboard_page);
+admin_router.get('/', is_authenticated, dashboard_page);
 
 // Login routes
-admin_router.get('/auth/login', login_page);
-admin_router.post('/auth/login', login_post);
+admin_router.get('/auth/login', redirect_if_authenticated, login_page);
+admin_router.post('/auth/login', redirect_if_authenticated, login_post);
 
 // Forgot password route
-admin_router.get('/auth/forgot-password', forgot_password);
-admin_router.post('/auth/forgot-password', forgot_password_post);
+admin_router.get('/auth/forgot-password', redirect_if_authenticated, forgot_password);
+admin_router.post('/auth/forgot-password', redirect_if_authenticated, forgot_password_post);
 
 // Verify OTP route
-admin_router.get('/auth/verify-otp', verify_otp);
-admin_router.post('/auth/verify-otp', verify_otp_post);
+admin_router.get('/auth/verify-otp', redirect_if_authenticated, verify_otp);
+admin_router.post('/auth/verify-otp', redirect_if_authenticated, verify_otp_post);
 
 // Reset password route
-admin_router.get('/auth/reset-password', reset_password);
-admin_router.post('/auth/reset-password', reset_password_post);
+admin_router.get('/auth/reset-password', redirect_if_authenticated, reset_password);
+admin_router.post('/auth/reset-password', redirect_if_authenticated, reset_password_post);
 
 export default admin_router;
