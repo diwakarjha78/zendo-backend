@@ -19,7 +19,7 @@ const app = express();
 // Middleware setup
 app.use(cors());
 app.use(helmet());
-app.use(cookieParser()); 
+app.use(cookieParser());
 app.set('view engine', 'ejs');
 app.use(expressLayouts);
 app.set('layout', 'root');

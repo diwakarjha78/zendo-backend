@@ -1,11 +1,11 @@
-document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('forgotPasswordForm').addEventListener('submit', function (e) {
-        const submitBtn = document.getElementById('submitBtn');
-        const btnText = document.getElementById('btnText');
-        const loadingText = document.getElementById('loadingText');
+document.addEventListener('DOMContentLoaded', function () {
+  document.getElementById('forgotPasswordForm').addEventListener('submit', function (e) {
+    const submitBtn = document.getElementById('submitBtn');
+    const btnText = document.getElementById('btnText');
+    const loadingText = document.getElementById('loadingText');
 
-        btnText.classList.add('hidden');
-        loadingText.classList.remove('hidden');
-        submitBtn.disabled = true;
-    });
+    btnText.classList.add('hidden');
+    loadingText.classList.remove('hidden');
+    submitBtn.disabled = true;
+  });
 });

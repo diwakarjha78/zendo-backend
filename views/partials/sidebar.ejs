@@ -1,0 +1,95 @@
+<aside id="sidebar"
+    class="hidden bg-white max-w-[300px] w-full h-full overflow-y-auto transition-transform duration-300 md:translate-x-0 -translate-x-full md:block border-r border-gray-200">
+    <!-- Logo / Title -->
+    <header class="sticky top-0 z-10 h-16 px-2 flex gap-3 items-center font-bold text-xl shadow">
+        <img src="/images/logo.png" alt="zendo-logo" class="rounded-full w-9 h-9" />
+        <span>Zendo Admin</span>
+    </header>
+
+    <!-- Navigation -->
+    <div class="flex-1 overflow-y-auto p-0 m-0">
+        <nav class="flex flex-col">
+            <!-- Dashboard -->
+            <a href="/" class="flex items-center gap-3 hover:bg-gray-200 rounded-none px-4 py-6">
+                <i class="fas fa-th-large w-5 h-5"></i>
+                <span class="font-medium">Dashboard</span>
+            </a>
+
+            <!-- User Management -->
+            <details class="group">
+                <summary
+                    class="flex items-center gap-3 cursor-pointer hover:bg-gray-200 px-4 py-3 data-[state=open]:bg-gray-200">
+                    <i class="fas fa-user w-5 h-5"></i>
+                    <span class="font-medium">User Management</span>
+                    <i class="fas fa-chevron-right ml-auto transition-transform group-open:rotate-90 w-4 h-4"></i>
+                </summary>
+                <div class="bg-gray-100">
+                    <a href="/user/profiles" class="flex items-center gap-3 hover:bg-gray-200 rounded-none px-7 py-6">
+                        <span class="text-sm">User Profiles</span>
+                    </a>
+                    <a href="/user/activity" class="flex items-center gap-3 hover:bg-gray-200 rounded-none px-7 py-6">
+                        <span class="text-sm">User Activity</span>
+                    </a>
+                </div>
+            </details>
+
+            <!-- Content Management -->
+            <a href="/content-management" class="flex items-center gap-3 hover:bg-gray-200 rounded-none px-4 py-6">
+                <i class="fas fa-file-alt w-5 h-5"></i>
+                <span class="font-medium">Content Management</span>
+            </a>
+
+            <!-- AI Rendering Oversight -->
+            <details class="group">
+                <summary
+                    class="flex items-center gap-3 cursor-pointer hover:bg-gray-200 px-4 py-3 data-[state=open]:bg-gray-200">
+                    <i class="fas fa-cog w-5 h-5"></i>
+                    <span class="font-medium">AI Rendering Oversight</span>
+                    <i class="fas fa-chevron-right ml-auto transition-transform group-open:rotate-90 w-4 h-4"></i>
+                </summary>
+                <div class="bg-gray-100">
+                    <a href="/ai/rendering/image"
+                        class="flex items-center gap-3 hover:bg-gray-200 rounded-none px-7 py-6">
+                        <span class="text-sm">AI Rendering Image</span>
+                    </a>
+                    <a href="/ai/furniture-finder"
+                        class="flex items-center gap-3 hover:bg-gray-200 rounded-none px-7 py-6">
+                        <span class="text-sm">Furniture Finder Data</span>
+                    </a>
+                </div>
+            </details>
+
+            <!-- Customer Support -->
+            <a href="/customer-support" class="flex items-center gap-3 hover:bg-gray-200 rounded-none px-4 py-6">
+                <i class="fas fa-headset w-5 h-5"></i>
+                <span class="font-medium">Customer Support</span>
+            </a>
+
+            <!-- Security and Payments -->
+            <details class="group">
+                <summary
+                    class="flex items-center gap-3 cursor-pointer hover:bg-gray-200 px-4 py-3 data-[state=open]:bg-gray-200">
+                    <i class="fas fa-credit-card w-5 h-5"></i>
+                    <span class="font-medium">Security and Payments</span>
+                    <i class="fas fa-chevron-right ml-auto transition-transform group-open:rotate-90 w-4 h-4"></i>
+                </summary>
+                <div class="bg-gray-100">
+                    <a href="/transactions" class="flex items-center gap-3 hover:bg-gray-200 rounded-none px-7 py-6">
+                        <span class="text-sm">Transaction Management</span>
+                    </a>
+                </div>
+            </details>
+        </nav>
+    </div>
+
+    <!-- Sidebar Footer -->
+    <div class="absolute w-full bottom-0 z-10 p-1 border-t border-gray-200 flex justify-around items-center shadow-md">
+        <div class="bg-transparent text-black hover:bg-gray-200 rounded cursor-pointer p-2 transition-colors">
+            <i class="fas fa-unlock-alt text-2xl"></i>
+        </div>
+        <div id="logout-btn"
+            class="bg-transparent text-black hover:bg-gray-200 rounded cursor-pointer p-2 transition-colors">
+            <i class="fas fa-sign-out-alt text-2xl"></i>
+        </div>
+    </div>
+</aside>

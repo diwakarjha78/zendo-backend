@@ -1,0 +1,78 @@
+<header class="sticky top-0 z-10 h-16 px-2 flex items-center shadow bg-white">
+    <div id="search-container" class="relative w-full hidden animate-slideDown">
+        <div class="flex items-center justify-between p-1">
+            <i class="fas fa-search w-5 h-5"></i>
+            <input
+                id="search-input"
+                type="text"
+                placeholder="Search sidebar..."
+                class="mx-3 flex-1 border-none focus:outline-none text-lg"
+            />
+            <button
+                id="close-search"
+                class="bg-transparent shadow-none text-black hover:bg-gray-200 rounded hover:cursor-pointer p-1"
+            >
+                <i class="fas fa-times w-5 h-5"></i>
+            </button>
+        </div>
+        <div id="search-results" class="absolute top-full left-0 right-0 bg-white shadow border rounded mt-5 p-2 overflow-auto z-10 hidden">
+            <!-- Search results will be populated here via JavaScript -->
+        </div>
+    </div>
+
+    <div id="header-content" class="flex justify-between w-full items-center">
+        <!-- Left side: Sidebar trigger & Search button -->
+        <div class="flex items-center gap-3">
+            <button 
+                id="menu-toggle" 
+                class="bg-transparent shadow-none text-black hover:bg-gray-200 rounded hover:cursor-pointer p-2"
+            >
+                <i class="fas fa-bars w-5 h-5"></i>
+            </button>
+            <button
+                id="search-toggle"
+                class="bg-transparent shadow-none text-black hover:bg-gray-200 rounded hover:cursor-pointer p-2"
+            >
+                <i class="fas fa-search w-5 h-5"></i>
+                <span class="sr-only">Search</span>
+            </button>
+        </div>
+
+        <!-- Right side: Welcome text, user avatar, notifications -->
+        <div class="flex items-center gap-5">
+            <div class="bg-transparent shadow-none text-black hover:bg-gray-200 rounded hover:cursor-pointer py-1.5 px-2">
+                <span class="font-semibold">Welcome / Admin</span>
+            </div>
+            
+            <!-- Profile dropdown -->
+            <div class="relative">
+                <div class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-200 cursor-pointer" id="profile-icon">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div id="profile-menu" class="absolute top-full right-0 mt-1 bg-white border rounded shadow-md w-48 z-50 hidden">
+                    <a href="/profile" class="flex items-center gap-3 p-2 hover:bg-gray-100">
+                        <i class="fas fa-user-circle w-5 h-5"></i>
+                        <span>Profile</span>
+                    </a>
+                    <a href="/settings" class="flex items-center gap-3 p-2 hover:bg-gray-100">
+                        <i class="fas fa-cog w-5 h-5"></i>
+                        <span>Settings</span>
+                    </a>
+                    <div class="border-t border-gray-200 my-1"></div>
+                    <button id="profile-logout-btn" class="flex items-center gap-3 p-2 hover:bg-gray-100 w-full text-left">
+                        <i class="fas fa-sign-out-alt w-5 h-5"></i>
+                        <span>Logout</span>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Notifications -->
+            <div class="relative">
+                <button class="bg-transparent shadow-none text-black hover:bg-gray-200 rounded hover:cursor-pointer p-2">
+                    <i class="fas fa-bell w-5 h-5"></i>
+                </button>
+                <!-- Notification dropdown could be added here -->
+            </div>
+        </div>
+    </div>
+</header>
