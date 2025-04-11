@@ -71,7 +71,7 @@
                                                     <%= user.email %>
                                                 </td>
                                                 <td class="py-4 px-4 text-gray-700">
-                                                    <%= user.mobile %>
+                                                    <%= user.mobile || '' %>
                                                 </td>
                                                 <td class="py-4 px-4">
                                                     <% if (user.is_active) { %>
@@ -89,14 +89,16 @@
                                                 <td class="py-4 px-4 text-center">
                                                     <% if (user.is_active) { %>
                                                         <!-- Delete Button -->
-                                                        <div id="userDeleteBtn"
-                                                            class="text-gray-500 hover:bg-gray-100 rounded p-1.5 hover:text-red-500 cursor-pointer inline-block">
+                                                        <div class="delete-user-btn text-gray-500 hover:bg-gray-100 rounded p-1.5 hover:text-red-500 cursor-pointer inline-block"
+                                                            data-user-id="<%= user._id %>"
+                                                            data-username="<%= user.username %>">
                                                             <i class="fa-solid fa-trash text-lg"></i>
                                                         </div>
                                                         <% } else { %>
                                                             <!-- Restore Button -->
-                                                            <div id="openRestoreModal"
-                                                                class="text-gray-500 hover:bg-gray-100 rounded p-1.5 hover:text-green-500 cursor-pointer inline-block">
+                                                            <div class="restore-user-btn text-gray-500 hover:bg-gray-100 rounded p-1.5 hover:text-green-500 cursor-pointer inline-block"
+                                                                data-user-id="<%= user._id %>"
+                                                                data-username="<%= user.username %>">
                                                                 <i class="fa-solid fa-rotate-left text-lg"></i>
                                                             </div>
                                                             <% } %>
@@ -109,24 +111,24 @@
                     </div>
 
                     <!-- Pagination Controls -->
-                    <div class="flex items-center justify-end pt-4 gap-1">
+                    <div class="pagination-container flex items-center justify-end pt-4 gap-1">
                         <a href="/user-profiles?page=1<%= search ? '&search=' + search : '' %>"
-                            class="<%= currentPage === 1 ? 'opacity-50 cursor-not-allowed' : '' %> cursor-pointer flex items-center justify-center rounded border border-gray-300 w-8 h-8 text-gray-600">
+                            class="pagination-link <%= currentPage === 1 ? 'opacity-50 cursor-not-allowed' : '' %> cursor-pointer flex items-center justify-center rounded border border-gray-300 w-8 h-8 text-gray-600">
                             <i class="fa-solid fa-angles-left text-xs"></i>
                         </a>
                         <a href="/user-profiles?page=<%= Math.max(1, currentPage - 1) %><%= search ? '&search=' + search : '' %>"
-                            class="<%= currentPage === 1 ? 'opacity-50 cursor-not-allowed' : '' %> cursor-pointer flex items-center justify-center rounded border border-gray-300 w-8 h-8 text-gray-600">
+                            class="pagination-link <%= currentPage === 1 ? 'opacity-50 cursor-not-allowed' : '' %> cursor-pointer flex items-center justify-center rounded border border-gray-300 w-8 h-8 text-gray-600">
                             <i class="fa-solid fa-angle-left text-xs"></i>
                         </a>
                         <span class="mx-3 text-sm text-gray-600">
                             Page <%= currentPage %> of <%= totalPages || 1 %>
                         </span>
                         <a href="/user-profiles?page=<%= Math.min(totalPages, currentPage + 1) %><%= search ? '&search=' + search : '' %>"
-                            class="<%= currentPage === totalPages || totalPages === 0 ? 'opacity-50 cursor-not-allowed' : '' %> cursor-pointer flex items-center justify-center rounded border border-gray-300 w-8 h-8 text-gray-600">
+                            class="pagination-link <%= currentPage === totalPages || totalPages === 0 ? 'opacity-50 cursor-not-allowed' : '' %> cursor-pointer flex items-center justify-center rounded border border-gray-300 w-8 h-8 text-gray-600">
                             <i class="fa-solid fa-angle-right text-xs"></i>
                         </a>
                         <a href="/user-profiles?page=<%= totalPages %><%= search ? '&search=' + search : '' %>"
-                            class="<%= currentPage === totalPages || totalPages === 0 ? 'opacity-50 cursor-not-allowed' : '' %> cursor-pointer flex items-center justify-center rounded border border-gray-300 w-8 h-8 text-gray-600">
+                            class="pagination-link <%= currentPage === totalPages || totalPages === 0 ? 'opacity-50 cursor-not-allowed' : '' %> cursor-pointer flex items-center justify-center rounded border border-gray-300 w-8 h-8 text-gray-600">
                             <i class="fa-solid fa-angles-right text-xs"></i>
                         </a>
                     </div>
@@ -142,7 +144,7 @@
                 <button id="closeDeleteModal" class="px-4 py-2 border border-gray-300 rounded text-sm">
                     Cancel
                 </button>
-                <div id="confirmDeleteBtn" class="px-4 py-2 bg-red-600 text-white rounded text-sm">
+                <div id="confirmDeleteBtn" class="px-4 py-2 bg-red-600 text-white rounded text-sm cursor-pointer">
                     Delete
                 </div>
             </div>
@@ -155,12 +157,12 @@
             <h3 class="text-lg font-medium mb-4">Confirm Restore</h3>
             <p class="mb-6">Are you sure you want to restore user <strong id="restoreUserName"></strong>?</p>
             <div class="flex justify-end gap-2">
-                <button onclick="closeRestoreModal()" class="px-4 py-2 border border-gray-300 rounded text-sm">
+                <button id="closeRestoreModal" class="px-4 py-2 border border-gray-300 rounded text-sm">
                     Cancel
                 </button>
-                <a href="#" id="confirmRestoreBtn" class="px-4 py-2 bg-green-600 text-white rounded text-sm">
+                <div id="confirmRestoreBtn" class="px-4 py-2 bg-green-600 text-white rounded text-sm cursor-pointer">
                     Restore
-                </a>
+                </div>
             </div>
         </div>
     </div>

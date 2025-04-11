@@ -5,6 +5,7 @@ export const user_profiles = async (req, res) => {
   try {
     const page = Number.parseInt(req.query.page) || 1;
     const search = req.query.search || '';
+    const isAjaxRequest = req.query.ajax === 'true';
     const ITEMS_PER_PAGE = 10;
 
     // Get token from cookies
@@ -22,6 +23,12 @@ export const user_profiles = async (req, res) => {
       users = response.data.data;
     } else {
       console.error('API Error:', response.data);
+      if (isAjaxRequest) {
+        return res.status(response.data.status_code || 500).json({
+          success: false,
+          message: response.data.message || 'Error fetching users',
+        });
+      }
       return res.status(response.data.status_code || 500).render('error', {
         message: response.data.message || 'Error fetching users',
       });
@@ -45,6 +52,20 @@ export const user_profiles = async (req, res) => {
     const startIndex = (page - 1) * ITEMS_PER_PAGE;
     const paginatedUsers = users.slice(startIndex, startIndex + ITEMS_PER_PAGE);
 
+    // Handle AJAX requests
+    if (isAjaxRequest) {
+      return res.json({
+        users: paginatedUsers,
+        currentPage: page,
+        totalPages,
+        totalUsers,
+        startIndex,
+        search,
+        itemsPerPage: ITEMS_PER_PAGE,
+      });
+    }
+
+    // Regular page render
     res.render('user_management/user_profile', {
       layout: 'layouts/admin',
       title: 'User profiles - Zendo Admin',
@@ -58,6 +79,9 @@ export const user_profiles = async (req, res) => {
     });
   } catch (error) {
     console.error('Error in user_profiles controller:', error);
+    if (req.query.ajax === 'true') {
+      return res.status(500).json({ success: false, message: 'Internal Server Error' });
+    }
     return res.status(500).render('error', { message: 'Internal Server Error' });
   }
 };
@@ -65,13 +89,21 @@ export const user_profiles = async (req, res) => {
 export const deleteUser = async (req, res) => {
   try {
     const userId = req.query.userId;
+    const isAjaxRequest = req.headers['content-type'] === 'application/json' || req.query.ajax === 'true';
+
     if (!userId) {
+      if (isAjaxRequest) {
+        return res.status(400).json({ success: false, message: 'User ID is required' });
+      }
       return res.status(400).json({ message: 'User ID is required' });
     }
 
     // Get token from cookies
     const token = req.cookies.zendo_user ? JSON.parse(req.cookies.zendo_user).zendo_at : null;
     if (!token) {
+      if (isAjaxRequest) {
+        return res.status(401).json({ success: false, message: 'Authentication required' });
+      }
       return res.status(401).json({ message: 'Authentication required' });
     }
 
@@ -87,8 +119,15 @@ export const deleteUser = async (req, res) => {
       if (req.session) {
         req.session.flashMessage = {
           type: 'success',
-          text: `User has been successfully deactivated.`,
+          text: response.data.message || 'User has been successfully deactivated.',
         };
+      }
+
+      if (isAjaxRequest) {
+        return res.json({
+          success: true,
+          message: response.data.message || 'User has been successfully deactivated.',
+        });
       }
 
       // Redirect back to the user profiles page
@@ -101,6 +140,14 @@ export const deleteUser = async (req, res) => {
           text: response.data.message || 'Failed to delete user',
         };
       }
+
+      if (isAjaxRequest) {
+        return res.json({
+          success: false,
+          message: response.data.message || 'Failed to delete user',
+        });
+      }
+
       return res.redirect('/user-profiles');
     }
   } catch (error) {
@@ -114,6 +161,10 @@ export const deleteUser = async (req, res) => {
       };
     }
 
+    if (req.headers['content-type'] === 'application/json' || req.query.ajax === 'true') {
+      return res.status(500).json({ success: false, message: 'Error deleting user' });
+    }
+
     return res.redirect('/user-profiles');
   }
 };
@@ -121,13 +172,21 @@ export const deleteUser = async (req, res) => {
 export const restoreUser = async (req, res) => {
   try {
     const userId = req.query.userId;
+    const isAjaxRequest = req.headers['content-type'] === 'application/json' || req.query.ajax === 'true';
+
     if (!userId) {
+      if (isAjaxRequest) {
+        return res.status(400).json({ success: false, message: 'User ID is required' });
+      }
       return res.status(400).json({ message: 'User ID is required' });
     }
 
     // Get token from cookies
     const token = req.cookies.zendo_user ? JSON.parse(req.cookies.zendo_user).zendo_at : null;
     if (!token) {
+      if (isAjaxRequest) {
+        return res.status(401).json({ success: false, message: 'Authentication required' });
+      }
       return res.status(401).json({ message: 'Authentication required' });
     }
 
@@ -147,6 +206,13 @@ export const restoreUser = async (req, res) => {
         };
       }
 
+      if (isAjaxRequest) {
+        return res.json({
+          success: true,
+          message: response.data.message || 'User has been successfully restored.',
+        });
+      }
+
       // Redirect back to the user profiles page
       return res.redirect('/user-profiles');
     } else {
@@ -157,6 +223,14 @@ export const restoreUser = async (req, res) => {
           text: response.data.message || 'Failed to restore user',
         };
       }
+
+      if (isAjaxRequest) {
+        return res.json({
+          success: false,
+          message: response.data.message || 'Failed to restore user',
+        });
+      }
+
       return res.redirect('/user-profiles');
     }
   } catch (error) {
@@ -168,6 +242,10 @@ export const restoreUser = async (req, res) => {
         type: 'error',
         text: 'Error restoring user',
       };
+    }
+
+    if (req.headers['content-type'] === 'application/json' || req.query.ajax === 'true') {
+      return res.status(500).json({ success: false, message: 'Error restoring user' });
     }
 
     return res.redirect('/user-profiles');
