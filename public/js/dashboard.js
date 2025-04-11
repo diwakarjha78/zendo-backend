@@ -26,6 +26,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Logout functionality
   const logoutBtn = document.getElementById('logout-btn');
+  const profileLogoutBtn = document.getElementById('profile-logout-btn');
   const logoutDialog = document.getElementById('logout-dialog');
   const closeDialog = document.getElementById('close-dialog');
   const cancelLogout = document.getElementById('cancel-logout');
@@ -33,6 +34,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Show dialog when logout button is clicked
   logoutBtn.addEventListener('click', function (e) {
+    console.log('Logout button clicked');
+    logoutDialog.classList.remove('hidden');
+    logoutDialog.classList.add('flex');
+    e.preventDefault(); // Prevent any default action
+    e.stopPropagation(); // Stop event bubbling
+  });
+
+  // Show dialog when logout button is clicked
+  profileLogoutBtn.addEventListener('click', function (e) {
     console.log('Logout button clicked');
     logoutDialog.classList.remove('hidden');
     logoutDialog.classList.add('flex');

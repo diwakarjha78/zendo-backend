@@ -11,6 +11,7 @@ import {
   verify_otp_post,
 } from '../controllers/login.controller.js';
 import { redirect_if_authenticated, is_authenticated } from '../middlewares/auth.middleware.js';
+import { user_profiles } from '../controllers/user.controller.js';
 
 const admin_router = express.Router();
 
@@ -32,5 +33,8 @@ admin_router.post('/auth/verify-otp', redirect_if_authenticated, verify_otp_post
 // Reset password route
 admin_router.get('/auth/reset-password', redirect_if_authenticated, reset_password);
 admin_router.post('/auth/reset-password', redirect_if_authenticated, reset_password_post);
+
+// User profiles route
+admin_router.get('/user-profiles', is_authenticated, user_profiles);
 
 export default admin_router;

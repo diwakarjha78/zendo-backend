@@ -7,11 +7,11 @@
     </header>
 
     <!-- Navigation -->
-    <div class="flex-1 overflow-y-auto p-0 m-0">
+    <div class="flex-1 overflow-y-auto p-0 m-0 mt-3">
         <nav class="flex flex-col">
             <!-- Dashboard -->
-            <a href="/" class="flex items-center gap-3 hover:bg-gray-200 rounded-none px-4 py-6">
-                <i class="fas fa-th-large w-5 h-5"></i>
+            <a href="/" class="flex items-center gap-3 hover:bg-gray-200 rounded-none px-4 py-3">
+                <i class="fas fa-th-large text-xl w-5"></i>
                 <span class="font-medium">Dashboard</span>
             </a>
 
@@ -19,23 +19,23 @@
             <details class="group">
                 <summary
                     class="flex items-center gap-3 cursor-pointer hover:bg-gray-200 px-4 py-3 data-[state=open]:bg-gray-200">
-                    <i class="fas fa-user w-5 h-5"></i>
+                    <i class="fas fa-user text-xl w-5"></i>
                     <span class="font-medium">User Management</span>
                     <i class="fas fa-chevron-right ml-auto transition-transform group-open:rotate-90 w-4 h-4"></i>
                 </summary>
                 <div class="bg-gray-100">
-                    <a href="/user/profiles" class="flex items-center gap-3 hover:bg-gray-200 rounded-none px-7 py-6">
+                    <a href="/user-profiles" class="flex items-center gap-3 hover:bg-gray-200 rounded-none px-7 py-3">
                         <span class="text-sm">User Profiles</span>
                     </a>
-                    <a href="/user/activity" class="flex items-center gap-3 hover:bg-gray-200 rounded-none px-7 py-6">
+                    <a href="/user-activity" class="flex items-center gap-3 hover:bg-gray-200 rounded-none px-7 py-3">
                         <span class="text-sm">User Activity</span>
                     </a>
                 </div>
             </details>
 
             <!-- Content Management -->
-            <a href="/content-management" class="flex items-center gap-3 hover:bg-gray-200 rounded-none px-4 py-6">
-                <i class="fas fa-file-alt w-5 h-5"></i>
+            <a href="/content-management" class="flex items-center gap-3 hover:bg-gray-200 rounded-none px-4 py-3">
+                <i class="fas fa-file-alt text-xl w-5"></i>
                 <span class="font-medium">Content Management</span>
             </a>
 
@@ -43,25 +43,25 @@
             <details class="group">
                 <summary
                     class="flex items-center gap-3 cursor-pointer hover:bg-gray-200 px-4 py-3 data-[state=open]:bg-gray-200">
-                    <i class="fas fa-cog w-5 h-5"></i>
+                    <i class="fas fa-cog text-xl w-5"></i>
                     <span class="font-medium">AI Rendering Oversight</span>
                     <i class="fas fa-chevron-right ml-auto transition-transform group-open:rotate-90 w-4 h-4"></i>
                 </summary>
                 <div class="bg-gray-100">
                     <a href="/ai/rendering/image"
-                        class="flex items-center gap-3 hover:bg-gray-200 rounded-none px-7 py-6">
+                        class="flex items-center gap-3 hover:bg-gray-200 rounded-none px-7 py-3">
                         <span class="text-sm">AI Rendering Image</span>
                     </a>
                     <a href="/ai/furniture-finder"
-                        class="flex items-center gap-3 hover:bg-gray-200 rounded-none px-7 py-6">
+                        class="flex items-center gap-3 hover:bg-gray-200 rounded-none px-7 py-3">
                         <span class="text-sm">Furniture Finder Data</span>
                     </a>
                 </div>
             </details>
 
             <!-- Customer Support -->
-            <a href="/customer-support" class="flex items-center gap-3 hover:bg-gray-200 rounded-none px-4 py-6">
-                <i class="fas fa-headset w-5 h-5"></i>
+            <a href="/customer-support" class="flex items-center gap-3 hover:bg-gray-200 rounded-none px-4 py-3">
+                <i class="fas fa-headset text-xl"></i>
                 <span class="font-medium">Customer Support</span>
             </a>
 
@@ -69,12 +69,12 @@
             <details class="group">
                 <summary
                     class="flex items-center gap-3 cursor-pointer hover:bg-gray-200 px-4 py-3 data-[state=open]:bg-gray-200">
-                    <i class="fas fa-credit-card w-5 h-5"></i>
+                    <i class="fas fa-credit-card text-xl"></i>
                     <span class="font-medium">Security and Payments</span>
                     <i class="fas fa-chevron-right ml-auto transition-transform group-open:rotate-90 w-4 h-4"></i>
                 </summary>
                 <div class="bg-gray-100">
-                    <a href="/transactions" class="flex items-center gap-3 hover:bg-gray-200 rounded-none px-7 py-6">
+                    <a href="/transactions" class="flex items-center gap-3 hover:bg-gray-200 rounded-none px-7 py-3">
                         <span class="text-sm">Transaction Management</span>
                     </a>
                 </div>
@@ -83,13 +83,11 @@
     </div>
 
     <!-- Sidebar Footer -->
-    <div class="absolute w-full bottom-0 z-10 p-1 border-t border-gray-200 flex justify-around items-center shadow-md">
-        <div class="bg-transparent text-black hover:bg-gray-200 rounded cursor-pointer p-2 transition-colors">
-            <i class="fas fa-unlock-alt text-2xl"></i>
-        </div>
+    <div class="absolute w-full bottom-0 z-10 px-2 py-2 border-t border-gray-200 flex items-center shadow-md">
         <div id="logout-btn"
-            class="bg-transparent text-black hover:bg-gray-200 rounded cursor-pointer p-2 transition-colors">
-            <i class="fas fa-sign-out-alt text-2xl"></i>
+            class="bg-transparent text-black hover:bg-gray-200 rounded cursor-pointer p-2 transition-colors flex items-center gap-4 w-full">
+            <i class="fas fa-sign-out-alt text-xl"></i>
+            <span class="font-medium">Logout</span>
         </div>
     </div>
 </aside>
