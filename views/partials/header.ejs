@@ -18,9 +18,15 @@
     <div id="header-content" class="flex justify-between w-full items-center">
         <!-- Left side: Sidebar trigger & Search button -->
         <div class="flex items-center gap-3">
-            <button id="menu-toggle"
-                class="bg-transparent shadow-none text-black hover:bg-gray-200 rounded hover:cursor-pointer p-2">
-                <i class="fa-solid fa-arrow-left w-5 h-5"></i>
+            <button id="hide-menu"
+                class="bg-transparent shadow-none text-black hover:bg-gray-200 rounded hover:cursor-pointer p-2 transition-opacity duration-200 ease-in-out">
+                <i
+                    class="fa-solid fa-arrow-left w-5 h-5 transform transition-transform duration-200 ease-in-out hover:-translate-x-0.5"></i>
+            </button>
+            <button id="show-menu"
+                class="hidden bg-transparent shadow-none text-black hover:bg-gray-200 rounded hover:cursor-pointer p-2 transition-opacity duration-200 ease-in-out">
+                <i
+                    class="fa-solid fa-bars w-5 h-5 transform transition-transform duration-200 ease-in-out hover:translate-x-0.5"></i>
             </button>
             <button id="search-toggle"
                 class="bg-transparent shadow-none text-black hover:bg-gray-200 rounded hover:cursor-pointer p-2">
@@ -30,7 +36,7 @@
         </div>
 
         <!-- Right side: Welcome text, user avatar, notifications -->
-        <div class="flex items-center gap-5">
+        <div class="flex items-center gap-3">
             <div
                 class="bg-transparent shadow-none text-black hover:bg-gray-200 rounded hover:cursor-pointer py-1.5 px-2">
                 <span class="font-semibold">Welcome / Admin</span>
@@ -45,13 +51,17 @@
                 <div id="profile-menu"
                     class="mt-1 absolute top-full right-0 bg-white border border-gray-200 rounded shadow-md w-48 z-50 hidden">
                     <a href="/profile" class="flex items-center gap-3 p-2 hover:bg-gray-100">
-                        <i class="fas fa-user-circle w-5 h-5"></i>
+                        <div class="">
+                            <i class="fas fa-user-circle"></i>
+                        </div>
                         <span>Profile</span>
                     </a>
                     <div class="border-t border-gray-200"></div>
                     <button id="profile-logout-btn"
                         class="flex items-center gap-3 p-2 hover:bg-gray-100 w-full text-left">
-                        <i class="fas fa-sign-out-alt w-5 h-5"></i>
+                        <div>
+                            <i class="fas fa-sign-out-alt"></i>
+                        </div>
                         <span>Logout</span>
                     </button>
                 </div>
@@ -61,7 +71,9 @@
             <div class="relative">
                 <button
                     class="bg-transparent shadow-none text-black hover:bg-gray-200 rounded hover:cursor-pointer p-2">
-                    <i class="fas fa-bell w-5 h-5"></i>
+                    <div class="mt-0.5">
+                        <i class="fas fa-bell text-xl"></i>
+                    </div>
                 </button>
                 <!-- Notification dropdown could be added here -->
             </div>

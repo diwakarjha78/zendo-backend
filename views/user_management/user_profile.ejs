@@ -136,15 +136,15 @@
     </div>
 
     <!-- Delete Confirmation Modal -->
-    <div id="deleteModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden items-center justify-center">
+    <div id="deleteModal" class="fixed inset-0 bg-black/50 z-50 hidden items-center justify-center">
         <div class="bg-white rounded-lg p-6 max-w-sm mx-auto">
             <h3 class="text-lg font-medium mb-4">Confirm Delete</h3>
             <p class="mb-6">Are you sure you want to delete user <strong id="deleteUserName"></strong>?</p>
             <div class="flex justify-end gap-2">
-                <button id="closeDeleteModal" class="px-4 py-2 border border-gray-300 rounded text-sm">
+                <button id="closeDeleteModal" class="px-4 py-2 border border-gray-200 hover:bg-gray-200 rounded text-sm cursor-pointer">
                     Cancel
                 </button>
-                <div id="confirmDeleteBtn" class="px-4 py-2 bg-red-600 text-white rounded text-sm cursor-pointer">
+                <div id="confirmDeleteBtn" class="px-4 py-2 bg-black hover:bg-black/80 text-white rounded text-sm cursor-pointer">
                     Delete
                 </div>
             </div>
