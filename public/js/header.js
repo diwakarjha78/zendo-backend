@@ -176,6 +176,7 @@ document.addEventListener('DOMContentLoaded', function () {
     console.warn('Logout elements not found in the DOM');
   }
 
+  // Search bar functionality
   const searchToggleBtn = document.getElementById('search-toggle');
   const closeSearchBtn = document.getElementById('close-search');
   const searchContainer = document.getElementById('search-container');
@@ -310,4 +311,180 @@ document.addEventListener('DOMContentLoaded', function () {
       searchResults.classList.add('hidden');
     }
   });
+
+  // Notification bell javascript
+  // URL endpoints for API requests
+  const API_GET_NOTIFICATIONS = 'api/v1/getAllAdminNotifications';
+  const API_MARK_AS_READ = 'api/v1/markAdminNotificationAsRead';
+  const API_DELETE_NOTIFICATION = 'api/v1/deleteAdminNotification'; // Append /:id
+
+  // Get element references
+  const notificationBell = document.getElementById('notification-bell');
+  const notificationDropdown = document.getElementById('notification-dropdown');
+  const notificationCountElem = document.getElementById('notification-count');
+  const notificationList = document.getElementById('notification-list');
+  const markAllReadBtn = document.getElementById('mark-all-read');
+  const deleteAllBtn = document.getElementById('delete-all');
+
+  let notifications = [];
+
+  // Fetch notifications from the backend
+  async function fetchNotifications() {
+    try {
+      const response = await fetch(API_GET_NOTIFICATIONS);
+      const data = await response.json();
+      if (data.status_code === 200) {
+        notifications = data.data; // Assuming an array of notifications
+        updateNotificationCount();
+        renderNotifications();
+      } else {
+        console.error('Error fetching notifications:', data);
+        notificationList.innerHTML = '<div class="px-4 py-3 text-sm text-gray-500">Unable to load notifications</div>';
+      }
+    } catch (error) {
+      console.error('Error fetching notifications:', error);
+      notificationList.innerHTML = '<div class="px-4 py-3 text-sm text-gray-500">Error loading notifications</div>';
+    }
+  }
+
+  // Update the unread count badge
+  function updateNotificationCount() {
+    const unreadCount = notifications.filter((n) => !n.is_read).length;
+    if (unreadCount > 0) {
+      notificationCountElem.textContent = unreadCount;
+      notificationCountElem.classList.remove('hidden');
+    } else {
+      notificationCountElem.classList.add('hidden');
+    }
+  }
+
+  // Render the notification list in the dropdown
+  function renderNotifications() {
+    if (notifications.length === 0) {
+      notificationList.innerHTML = '<div class="px-4 py-3 text-sm text-gray-500">No notifications</div>';
+      return;
+    }
+    notificationList.innerHTML = '';
+
+    notifications.forEach((notif) => {
+      const notifElem = document.createElement('div');
+      notifElem.className = `px-4 py-2 flex justify-between items-start transition-all duration-300 hover:bg-gray-50 ${!notif.is_read ? 'bg-gray-50 border-y' : 'bg-white'}`;
+
+      // Content container – clicking marks as read.
+      const contentDiv = document.createElement('div');
+      contentDiv.className = 'flex-1 cursor-pointer';
+      contentDiv.onclick = () => markAsRead(notif.id);
+
+      const title = document.createElement('p');
+      title.className = `text-sm ${!notif.is_read ? 'font-bold' : 'font-medium'}`;
+      title.textContent = notif.title;
+
+      const message = document.createElement('p');
+      message.className = 'text-xs text-gray-500';
+      message.textContent = notif.message;
+
+      const dateElem = document.createElement('p');
+      dateElem.className = 'text-[10px] text-gray-400';
+      dateElem.textContent = new Date(notif.createdAt).toLocaleString();
+
+      contentDiv.appendChild(title);
+      contentDiv.appendChild(message);
+      contentDiv.appendChild(dateElem);
+
+      // Delete icon
+      const deleteIcon = document.createElement('i');
+      deleteIcon.className =
+        'fas fa-trash-alt text-gray-400 hover:text-red-500 mt-1 ml-2 cursor-pointer transition-colors duration-200';
+      deleteIcon.style.fontSize = '14px';
+      deleteIcon.onclick = (e) => {
+        e.stopPropagation(); // prevent triggering markAsRead
+        deleteNotification(notif.id);
+      };
+
+      notifElem.appendChild(contentDiv);
+      notifElem.appendChild(deleteIcon);
+      notificationList.appendChild(notifElem);
+    });
+  }
+
+  // Mark a notification as read
+  async function markAsRead(id) {
+    try {
+      await fetch(API_MARK_AS_READ, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id }),
+      });
+      await fetchNotifications();
+    } catch (error) {
+      console.error('Error marking notification as read:', error);
+    }
+  }
+
+  // Mark all notifications as read
+  async function markAllRead() {
+    try {
+      // Filter for unread notifications and mark each as read
+      const unreadNotifications = notifications.filter((n) => !n.is_read);
+      await Promise.all(
+        unreadNotifications.map((notif) =>
+          fetch(API_MARK_AS_READ, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id: notif.id }),
+          })
+        )
+      );
+      await fetchNotifications();
+    } catch (error) {
+      console.error('Error marking all notifications as read:', error);
+    }
+  }
+
+  // Delete a single notification
+  async function deleteNotification(id) {
+    try {
+      await fetch(`${API_DELETE_NOTIFICATION}/${id}`, { method: 'DELETE' });
+      await fetchNotifications();
+    } catch (error) {
+      console.error('Error deleting notification:', error);
+    }
+  }
+
+  // Delete all notifications
+  async function deleteAllNotifications() {
+    try {
+      await Promise.all(
+        notifications.map((notif) => fetch(`${API_DELETE_NOTIFICATION}/${notif.id}`, { method: 'DELETE' }))
+      );
+      await fetchNotifications();
+    } catch (error) {
+      console.error('Error deleting all notifications:', error);
+    }
+  }
+
+  // Toggle the notification dropdown visibility
+  function toggleDropdown() {
+    notificationDropdown.classList.toggle('hidden');
+  }
+
+  // Close the dropdown (for example, when clicking outside)
+  function closeDropdown() {
+    notificationDropdown.classList.add('hidden');
+  }
+
+  // Event listeners
+  notificationBell.addEventListener('click', toggleDropdown);
+  markAllReadBtn.addEventListener('click', markAllRead);
+  deleteAllBtn.addEventListener('click', deleteAllNotifications);
+
+  // Optionally, close the dropdown when clicking outside
+  document.addEventListener('click', function (e) {
+    if (!document.getElementById('notification-container').contains(e.target)) {
+      closeDropdown();
+    }
+  });
+
+  // Fetch notifications when the page loads
+  fetchNotifications();
 });

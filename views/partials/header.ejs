@@ -70,15 +70,38 @@
             </div>
 
             <!-- Notifications -->
-            <div class="relative">
-                <button
+            <div id="notification-container" class="relative">
+                <!-- Notification Bell Button -->
+                <button id="notification-bell"
                     class="bg-transparent shadow-none text-black hover:bg-gray-200 rounded hover:cursor-pointer p-2">
-                    <div class="mt-0.5">
-                        <i class="fas fa-bell text-xl"></i>
-                    </div>
+                    <i class="fas fa-bell text-xl"></i>
+                    <!-- Unread count badge; hidden by default -->
+                    <span id="notification-count"
+                        class="flex absolute top-0 right-0 items-center justify-center px-1 text-xs text-white bg-red-600 rounded-full"></span>
                 </button>
-                <!-- Notification dropdown could be added here -->
+
+                <!-- Dropdown Content -->
+                <div id="notification-dropdown"
+                    class="hidden absolute right-0 mt-2 w-80 bg-white border border-gray-200 rounded shadow-xl z-50">
+                    <!-- Dropdown Header -->
+                    <div class="px-4 py-3 border-b bg-white flex items-center justify-between rounded-t">
+                        <h2 class="font-semibold text-sm">NOTIFICATIONS</h2>
+                        <button id="mark-all-read"
+                            class="text-sm font-medium text-blue-600 hover:underline cursor-pointer">Mark All
+                            Read</button>
+                    </div>
+                    <!-- Notification List -->
+                    <div id="notification-list" class="max-h-72 overflow-y-auto bg-white">
+                        <div class="px-4 py-3 text-sm text-gray-500">Loading notifications...</div>
+                    </div>
+                    <!-- Dropdown Footer -->
+                    <div class="px-4 py-3 border-t bg-white flex items-center justify-end rounded-b">
+                        <button id="delete-all"
+                            class="text-sm font-medium text-blue-600 hover:underline cursor-pointer">Clear All</button>
+                    </div>
+                </div>
             </div>
+
         </div>
     </div>
 </header>
