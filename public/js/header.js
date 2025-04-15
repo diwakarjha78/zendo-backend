@@ -175,4 +175,139 @@ document.addEventListener('DOMContentLoaded', function () {
   } else {
     console.warn('Logout elements not found in the DOM');
   }
+
+  const searchToggleBtn = document.getElementById('search-toggle');
+  const closeSearchBtn = document.getElementById('close-search');
+  const searchContainer = document.getElementById('search-container');
+  const searchInput = document.getElementById('search-input');
+  const searchResults = document.getElementById('search-results');
+  const headerContent = document.getElementById('header-content');
+
+  const sidebarData = [
+    {
+      title: 'Dashboard',
+      url: '/',
+      icon: '<i class="fas fa-th-large mr-2 mt-0.5"></i>',
+    },
+    {
+      title: 'User Management',
+      url: '/',
+      icon: '<i class="fas fa-user mr-2 mt-0.5"></i>',
+      isOption: true,
+      subOptions: [
+        {
+          title: 'User Profiles',
+          url: '/user-profiles',
+        },
+        {
+          title: 'User Activity',
+          url: '/user-activity',
+        },
+      ],
+    },
+    {
+      title: 'Content Management',
+      url: '/content-management',
+      icon: '<i class="fas fa-file-alt mr-2 mt-0.5"></i>',
+    },
+    {
+      title: 'AI Rendering Oversight',
+      url: '/settings',
+      icon: '<i class="fas fa-cog mr-2 mt-0.5"></i>',
+      isOption: true,
+      subOptions: [
+        {
+          title: 'AI Rendering Image',
+          url: '/ai-rendering-image',
+        },
+        {
+          title: 'Furniture Finder Data',
+          url: '/furniture-finder-data',
+        },
+      ],
+    },
+    {
+      title: 'Customer Support',
+      url: '/customer-support',
+      icon: '<i class="fas fa-headset mr-2 mt-0.5"></i>',
+    },
+    {
+      title: 'Security and Payments',
+      url: '/settings',
+      icon: '<i class="fas fa-credit-card mr-2 mt-0.5"></i>',
+      isOption: true,
+      subOptions: [
+        {
+          title: 'Transaction Management',
+          url: '/transaction-management',
+        },
+      ],
+    },
+  ];
+
+  function renderSearchResults(query) {
+    const lowerQuery = query.toLowerCase();
+    const matchedItems = [];
+
+    sidebarData.forEach((item) => {
+      const mainMatch = item.title.toLowerCase().includes(lowerQuery);
+      const subMatches = item.subOptions?.filter((sub) => sub.title.toLowerCase().includes(lowerQuery)) || [];
+
+      if (mainMatch || subMatches.length > 0) {
+        matchedItems.push({ ...item, subOptions: subMatches });
+      }
+    });
+
+    searchResults.innerHTML = '';
+    if (matchedItems.length === 0) {
+      searchResults.innerHTML = '<div class="px-2 py-1 text-gray-500">No results found.</div>';
+      return;
+    }
+
+    matchedItems.forEach((item) => {
+      const itemHTML = `
+        <a href="${item.url}" class="flex items-center px-2 py-1 hover:bg-gray-100 rounded" onclick="closeSearchBox()">
+          ${item.icon || ''}<span>${item.title}</span>
+        </a>
+      `;
+      searchResults.innerHTML += itemHTML;
+
+      if (item.subOptions) {
+        item.subOptions.forEach((sub) => {
+          const subHTML = `
+            <a href="${sub.url}" class="flex items-center pl-6 pr-2 py-1 hover:bg-gray-100 rounded" onclick="closeSearchBox()">
+              ${sub.icon || ''}<span>${sub.title}</span>
+            </a>
+          `;
+          searchResults.innerHTML += subHTML;
+        });
+      }
+    });
+  }
+
+  function closeSearchBox() {
+    searchContainer.classList.add('hidden');
+    searchResults.classList.add('hidden');
+    headerContent.classList.remove('!hidden');
+    searchInput.value = '';
+  }
+
+  searchToggleBtn.addEventListener('click', () => {
+    searchContainer.classList.remove('hidden');
+    searchResults.classList.remove('hidden');
+    headerContent.classList.add('!hidden');
+    searchInput.focus();
+  });
+
+  closeSearchBtn.addEventListener('click', closeSearchBox);
+
+  searchInput.addEventListener('input', () => {
+    const query = searchInput.value.trim();
+    if (query.length > 0) {
+      searchResults.classList.remove('hidden');
+      renderSearchResults(query);
+    } else {
+      searchResults.classList.add('hidden');
+    }
+  });
 });

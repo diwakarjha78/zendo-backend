@@ -1,7 +1,9 @@
 <header class="sticky top-0 z-10 h-16 px-2 flex items-center shadow bg-white">
     <div id="search-container" class="relative w-full hidden animate-slideDown">
         <div class="flex items-center justify-between p-1">
-            <i class="fas fa-search w-5 h-5"></i>
+            <div class="mt-0.5 w-5">
+                <i class="fas fa-search"></i>
+            </div>
             <input id="search-input" type="text" placeholder="Search sidebar..."
                 class="mx-3 flex-1 border-none focus:outline-none text-lg" />
             <button id="close-search"
@@ -10,7 +12,7 @@
             </button>
         </div>
         <div id="search-results"
-            class="absolute top-full left-0 right-0 bg-white shadow border rounded mt-5 p-2 overflow-auto z-10 hidden">
+            class="absolute top-full left-0 right-0 bg-white shadow border-none rounded mt-5 p-2 overflow-auto z-10 hidden">
             <!-- Search results will be populated here via JavaScript -->
         </div>
     </div>
